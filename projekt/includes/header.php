@@ -7,21 +7,29 @@
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
      </head>
      <body>
-     <ul class="nav nav-pills mb-3 shadow" id="pills-tab" role="tablist">
-         <li class="nav-item" role="presentation">
-             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
-         </li>
-         <li class="nav-item" role="presentation">
-             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
-         </li>
-         <li class="nav-item" role="presentation">
-             <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
-         </li>
-         <li class="nav-item ms-auto" >
-             <button class="nav-link active login" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Log in</button>
-         </li>
-     </ul>
+     <form method="post">
+         <ul class="nav nav-pills mb-3 shadow" id="pills-tab" role="tablist">
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="submit" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="submit" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
+             </li>
+             <li class="nav-item" role="presentation">
+                 <button class="nav-link" id="pills-contact-tab" name="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="submit" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
+             </li>
+             <li class="nav-item ms-auto" >
+                 <button class="nav-link active login" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="submit" role="tab" aria-controls="pills-profile" aria-selected="false">Log in</button>
+             </li>
+         </ul>
+     </form>
 
      </body>
 
 </html>
+<?php
+    if(isset($_POST['book-service'])){
+        header('location:book-service.php');
+    }
+
+?>

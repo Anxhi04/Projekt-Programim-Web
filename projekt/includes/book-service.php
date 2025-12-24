@@ -1,0 +1,249 @@
+<?php
+   include('header.php')
+?>
+<DOCTYPE html>
+    <html>
+         <head>
+             <link href="css\book-service.css" rel="stylesheet">
+
+         </head>
+         <body>
+         <h6>Our Services</h6>
+         <p class="text"> Select a service and choose your prefered date and time</p>
+         <br>
+         <div class="container">
+             <div class="card">
+                 <div class="card-header">
+                     Hair
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Haircut & Styling</h5>
+                     <p class="card-text">Professional haircut and styling tailored to your face shape and preferences.</p>
+                     <div class="price-time">
+                         <span>15€</span>
+                         <span>45 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Haircut</h5>
+                     <p class="card-text">Classic or modern haircut customized to your style.</p>
+                     <div class="price-time">
+                         <span>12€</span>
+                         <span>30min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Wash & Blow-Dry</h5>
+                     <p class="card-text">Hair wash with professional products followed by a smooth or voluminous blow-dry.</p>
+                     <div class="price-time">
+                         <span>8€</span>
+                         <span>30min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair Coloring
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Full Hair Coloring</h5>
+                     <p class="card-text">Complete hair coloring using high-quality professional dyes.</p>
+                     <div class="price-time">
+                         <span>30€</span>
+                         <span>90min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair Coloring
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Root Touch Up</h5>
+                     <p class="card-text">Color refresh for roots to maintain an even tone.</p>
+                     <div class="price-time">
+                         <span>20€</span>
+                         <span>60min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair Coloring
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Balayage</h5>
+                     <p class="card-text">Natural-looking highlights for a modern, sun-kissed effect.</p>
+                     <div class="price-time">
+                         <span>80€</span>
+                         <span>120min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Hair Coloring
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Highlights</h5>
+                     <p class="card-text">Classic or modern highlights for added dimension and brightness.</p>
+                     <div class="price-time">
+                         <span>60€</span>
+                         <span>100 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Treatments
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Hair Mask & Treatment</h5>
+                     <p class="card-text">Deep conditioning treatment to restore and nourish damaged hair.</p>
+                     <div class="price-time">
+                         <span>15€</span>
+                         <span>30 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Treatments
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Keratin Treatment</h5>
+                     <p class="card-text">Smoothing treatment that reduces frizz and adds shine.</p>
+                     <div class="price-time">
+                         <span>70€</span>
+                         <span>120 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Treatments
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Botox Hair Treatment</h5>
+                     <p class="card-text">Intensive repair treatment for dry and damaged hair.</p>
+                     <div class="price-time">
+                         <span>50€</span>
+                         <span>90 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Styling
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Blow-Dry Styling</h5>
+                     <p class="card-text">Professional blow-dry for a polished everyday look.</p>
+                     <div class="price-time">
+                         <span>10€</span>
+                         <span>30 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Styling
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Curling / Waves</h5>
+                     <p class="card-text">Soft curls or beach waves for a stylish finish.</p>
+                     <div class="price-time">
+                         <span>12€</span>
+                         <span>30 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Styling
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Hair Straightening</h5>
+                     <p class="card-text">Sleek and smooth straightening using professional tools.</p>
+                     <div class="price-time">
+                         <span>12€</span>
+                         <span>30 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Bridal & Events
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Bridal Hairstyle</h5>
+                     <p class="card-text">Elegant and long-lasting hairstyle for your special day.</p>
+                     <div class="price-time">
+                         <span>60€</span>
+                         <span>90 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Bridal & Events
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Event / Evening Hairstyle</h5>
+                     <p class="card-text">Glamorous hairstyle for parties and special occasions.</p>
+                     <div class="price-time">
+                         <span>30€</span>
+                         <span>60 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Care & Extras
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Hair Consultation</h5>
+                     <p class="card-text">Personalized consultation to choose the best style or treatment.</p>
+                     <div class="price-time">
+                         <span>Free</span>
+                         <span>15 min</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="card">
+                 <div class="card-header">
+                     Care & Extras
+                 </div>
+                 <div class="card-body">
+                     <h5 class="card-title">Hair Extensions Consultation</h5>
+                     <p class="card-text">Consultation for hair extensions, color matching and method selection.</p>
+                     <div class="price-time">
+                         <span>Free</span>
+                         <span>20 min</span>
+                     </div>
+                 </div>
+             </div>
+
+
+
+
+
+
+
+
+         </div>
+
+         </body>
+    </html>
+</DOCTYPE>
+
