@@ -292,10 +292,14 @@
                  const cards = document.querySelectorAll(".container .card");
                  const book = document.getElementById("book");
                  const timeslots = document.getElementById("timeSlots");
+                 let values=[];
+
                  //If a service is clicked this will be directing us on book a service part
                  cards.forEach(card=>{
                      card.addEventListener("click", ()=>{
-                         const title = card.querySelector(".card-title").innerText;
+                         let title = card.querySelector(".card-title").innerText;
+                         values.push(title);
+
                          book.querySelector(".card-header").innerText=`Book ${title}`;
                          book.style.display="block";
                          book.scrollIntoView({
@@ -304,11 +308,15 @@
                          })
                      })
                  })
+
                  //If the user has put the date is time to select the time so time div is shown
                  const dateInput =  document.getElementById("dateInput");
                  dateInput.addEventListener("change", ()=>{
                      timeslots.classList.remove("hidden");
                      timeslots.style.display="flex";
+                     console.log(dateInput.value);
+                     values.push(dateInput.value);
+
                  })
                  //This is the code part that shows the informations about the booking that the user has done
                  const timebtn = document.querySelectorAll("#timeSlots .time-slot");
@@ -317,7 +325,14 @@
                  let selectedtime=null;
                  timebtn.forEach(btn=>{
                      btn.addEventListener("click", ()=>{
-                         selectedtime=btn.textContent.trim();
+                         let infoSpans = document.querySelectorAll('.summary-item .text-end');
+                         values.push(btn.textContent.trim());
+                         values.push(document.querySelector('.price-time span:nth-child(2)').textContent);
+                         values.push(document.querySelector('.price-time span:nth-child(1)').textContent);
+
+                         infoSpans.forEach((span,i)=>{
+                             span.textContent=values[i];
+                         })
                          totalInfo.classList.remove("total-info");
                          console.log(selectedtime);
                          btn.style.background="grey";
