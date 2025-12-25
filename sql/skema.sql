@@ -1,10 +1,10 @@
 --  Reservation Platform DB
 
-CREATE DATABASE IF NOT EXISTS reservation_platform
-  DEFAULT CHARACTER SET utf8mb4
-  DEFAULT COLLATE utf8mb4_unicode_ci;
-
-USE reservation_platform;
+# CREATE DATABASE IF NOT EXISTS reservation_platform
+#   DEFAULT CHARACTER SET utf8mb4
+#   DEFAULT COLLATE utf8mb4_unicode_ci;
+#
+# USE reservation_platform;
 -- 1) USERS
 CREATE TABLE IF NOT EXISTS users (
                        id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,

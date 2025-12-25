@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . '/config/config.php';
+$config = require __DIR__ . '/projekt/app/config/config.php';
 
 $connection = mysqli_connect(
     $config['db_host'],           // host
@@ -12,5 +12,7 @@ $connection = mysqli_connect(
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
+else
+    echo "Connected successfully";
 
 mysqli_set_charset($connection, 'utf8mb4');

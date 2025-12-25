@@ -19,7 +19,8 @@
                  <button class="nav-link" id="pills-contact-tab" name="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="submit" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
              </li>
              <li class="nav-item ms-auto" >
-                 <button class="nav-link active login" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="submit" role="tab" aria-controls="pills-profile" aria-selected="false">Log in</button>
+                 <button class="nav-link active login" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="submit" role="tab" aria-controls="pills-profile" aria-selected="false">Login
+                 </button>
              </li>
          </ul>
      </form>

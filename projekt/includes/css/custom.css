@@ -1,0 +1,66 @@
+.bg-primary{
+    background-color: rgb(236 56 162 / 40%) !important;
+}
+.text-bg-primary {
+    color: #fff!important;
+    background-color: rgb(224 65 165 / 0%) !important;
+}
+.btn-primary {
+    background-color: rgba(255, 51, 153, 0.68) !important;
+    border-color: rgba(255, 51, 153, 0.68)  !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: rgba(255, 51, 153, 0.85) !important;
+    border-color: rgba(255, 51, 153, 0.85) !important;
+}
+.form-control:focus {
+    border-color: rgba(255, 51, 153, 0.55);
+    box-shadow: 0 0 0 0.2rem rgba(255, 51, 153, 0.55);
+}
+
+.link-primary {
+    color: rgba(255, 51, 153, 0.85) !important;
+}
+
+.link-primary:hover {
+    color: rgba(255, 51, 153, 0.85) !important;
+}
+
+
+
+
+.form-check-input {
+    border-color: rgba(255, 51, 153, 0.85);
+}
+
+
+.form-check-input:hover {
+    border-color: rgba(255, 51, 153, 0.85);
+}
+
+
+.form-check-input:focus {
+    border-color: rgba(255, 51, 153, 0.85);
+    box-shadow: 0 0 0 0.2rem rgba(255, 51, 153, 0.35);
+}
+
+
+.form-check-input:checked {
+    background-color: rgba(255, 51, 153, 0.85);
+    border-color: rgba(255, 51, 153, 0.85);
+}
+
+
+.form-check-input:checked:hover,
+.form-check-input:checked:focus {
+    background-color: rgba(255, 51, 153, 0.85);
+    border-color: rgba(255, 51, 153, 0.85);
+    box-shadow: 0 0 0 0.2rem rgba(255, 51, 153, 0.55);
+}
+
+
+
+
