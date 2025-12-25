@@ -47,12 +47,14 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
                                         <label for="email" class="form-label">Email</label>
+                                        <span id="email_message"></span>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
                                         <label for="password" class="form-label">Password</label>
+                                        <span id="password_message"></span>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -65,7 +67,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg" type="submit">Log in now</button>
+                                        <button class="btn btn-primary btn-lg" type="button" onclick="login()">Log in now</button>
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +108,31 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    //Validation of data
+    function login(){
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var error = 0;
+        //Validation of email
+        if(!email_regex.test(email) || !email.trim()){
+            $("#email_message").text("E-mail nuk eshte i vendosur sakte");
+            error++;
+        }else{
+            $("#email_message").text("");
+        }
+        //Validation of password
+        if(!password.trim()){
+            $("#password_message").text("Password should be filled");
+            error++;
+        }else{
+            $("#password_message").text("");
+        }
+    }
+
+</script>
 
 </body>
 </html>
