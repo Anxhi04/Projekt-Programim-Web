@@ -250,7 +250,38 @@
                          <button type="button" class="btn btn-outline-secondary time-slot">11:00</button>
                          <button type="button" class="btn btn-outline-secondary time-slot">12:00</button>
                      </div>
+                     <br>
+                     <div class="card mb-3 total-info" id="total-info" >
+                         <div class="card-body text-success">
+                             <div class="summary-item">
+                                 <span class="label">Service:</span>
+                                 <span class="text-end"></span>
+                             </div>
+                             <div class="summary-item">
+                                 <span class="label">Date:</span>
+                                 <span class="text-end"></span>
+                             </div>
+                             <div class="summary-item">
+                                 <span class="label">Time:</span>
+                                 <span class="text-end"></span>
+                             </div>
+                             <div class="summary-item">
+                                 <span class="label">Duration:</span>
+                                 <span class="text-end"></span>
+                             </div>
 
+                         </div>
+                         <div class="card-footer bg-transparent ">
+                             <div class="summary-item">
+                                 <span class="label">Total:</span>
+                                 <span class="text-end"></span>
+                             </div>
+                         </div>
+                     </div>
+                 <br>
+                 <div class="d-grid gap-2 d-md-block" >
+                     <button class="btn btn-primary" id="bookBtn" type="submit">📆Book</button>
+                 </div>
                  </div>
              </div>
 
@@ -280,6 +311,28 @@
                      timeslots.classList.remove("hidden");
                      timeslots.style.display="flex";
                  })
+                 //This is the code part that shows the informations about the booking that the user has done
+                 const timebtn = document.querySelectorAll("#timeSlots .time-slot");
+                 const totalInfo = document.getElementById("total-info");
+                 const bookBtn= document.getElementById("bookBtn");
+                 let selectedtime=null;
+                 timebtn.forEach(btn=>{
+                     btn.addEventListener("click", ()=>{
+                         selectedtime=btn.textContent.trim();
+                         totalInfo.classList.remove("total-info");
+                         console.log(selectedtime);
+                         btn.style.background="grey";
+                         btn.style.color="white";
+                         bookBtn.style.display="block";
+                         totalInfo.scrollIntoView({
+                             behavior: "smooth",
+                             block:"end"
+                         })
+
+
+                     })
+                 })
+
 
 
 

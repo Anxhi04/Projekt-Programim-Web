@@ -51,4 +51,32 @@ p{
 .hidden{
     display: none !important;
 }
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.card span{
+    color: grey;
+}
+.total-info{
+    display: none;
+}
+.d-grid{
+    width: 100%;
+}
+.d-grid .btn-primary{
+    width: 100%;
+    background-color: pink;
+    border: none;
+    display: none;
+}
+.d-grid .btn-primary:focus{
+    background-color: rgba(255, 20, 147, 0.8);
+    border: none;
+}
+.form-control:focus {
+    border-color: rgba(255, 192, 203, 0.88);
+    box-shadow: 0 0 0 .1rem rgb(197, 57, 197);
+}
 
