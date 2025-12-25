@@ -1,6 +1,6 @@
-.card-body {
+.container  {
     position: relative;
-    height: 100%;
+    padding-bottom: 40px;
 }
 .price-time {
     display: flex;
@@ -28,7 +28,7 @@ p{
 .container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2%;
+    gap: 24px;
     justify-content: center;
 }
 .card:hover{
@@ -56,6 +56,7 @@ p{
     justify-content: space-between;
     margin-bottom: 8px;
 }
+
 .card span{
     color: grey;
 }
@@ -79,4 +80,10 @@ p{
     border-color: rgba(255, 192, 203, 0.88);
     box-shadow: 0 0 0 .1rem rgb(197, 57, 197);
 }
+.book-info{
+    margin-left: 10%;
+    margin-right: 10% ;
+}
+
+
 
