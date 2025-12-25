@@ -45,3 +45,10 @@ p{
 .card .card-body{
     color: #c539c5;
 }
+.book-info{
+    display: none;
+}
+.hidden{
+    display: none !important;
+}
+

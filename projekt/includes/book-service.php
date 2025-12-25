@@ -233,16 +233,61 @@
                      </div>
                  </div>
              </div>
+         </div>
+         <form method="post">
+          <div class="book-info" id="book">
+             <div class="card">
+                 <div class="card-header">
+                 </div>
+                 <div class="card-body">
+                     Select date:
+                     <input type="date" class="form-control" id="dateInput">
+                     <br>
+                     <div class="d-flex flex-wrap gap-2 hidden" id="timeSlots">
+                         <span>Select time:</span>
+                         <button type="button" class="btn btn-outline-secondary time-slot">09:00</button>
+                         <button type="button" class="btn btn-outline-secondary time-slot">10:00</button>
+                         <button type="button" class="btn btn-outline-secondary time-slot">11:00</button>
+                         <button type="button" class="btn btn-outline-secondary time-slot">12:00</button>
+                     </div>
 
-
-
-
-
-
-
+                 </div>
+             </div>
 
          </div>
+         </form>
 
+         <script>
+             document.addEventListener("DOMContentLoaded", ()=>{
+                 const cards = document.querySelectorAll(".container .card");
+                 const book = document.getElementById("book");
+                 const timeslots = document.getElementById("timeSlots");
+                 //If a service is clicked this will be directing us on book a service part
+                 cards.forEach(card=>{
+                     card.addEventListener("click", ()=>{
+                         const title = card.querySelector(".card-title").innerText;
+                         book.querySelector(".card-header").innerText=`Book ${title}`;
+                         book.style.display="block";
+                         book.scrollIntoView({
+                             behavior: "smooth",
+                             block:"start"
+                         })
+                     })
+                 })
+                 //If the user has put the date is time to select the time so time div is shown
+                 const dateInput =  document.getElementById("dateInput");
+                 dateInput.addEventListener("change", ()=>{
+                     timeslots.classList.remove("hidden");
+                     timeslots.style.display="flex";
+                 })
+
+
+
+
+             })
+
+
+         </script>
          </body>
     </html>
 </DOCTYPE>
