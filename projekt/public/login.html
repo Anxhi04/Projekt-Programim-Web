@@ -131,27 +131,28 @@
         }else{
             $("#password_message").text("");
         }
-    }
-    //Create a form data in order to send data to php
+        //Create a form data in order to send data to php
 
-    var data = new FormData();
-    data.append("action", "login");
-    data.append("email", email);
-    data.append("password", password);
+        var data = new FormData();
+        data.append("action", "login");
+        data.append("email", email);
+        data.append("password", password);
 
-    //Send data on backend
-    if(error==0){
-        fetch("login.php",{
-            method:"POST",
-            body:data
-        }).then(response=>response.json()).then(response=>{
-            if(response.status==400){
-                window.location.href="home.php";
-            }else{
-                alert(response.message);
-            }
-        })
+        //Send data on backend
+        if(error==0){
+            fetch("login.php",{
+                method:"POST",
+                body:data
+            }).then(response=>response.json()).then(response=>{
+                if(response.status==200){
+                    window.location.href="/projekt/includes/home.php";
+                }else{
+                    alert(response.message);
+                }
+            })
+        }
     }
+
 
 
 

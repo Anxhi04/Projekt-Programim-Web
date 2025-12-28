@@ -2,3 +2,5 @@
 .env
 /test_db.php
 /projekt/app
+/db.php
+/create_user.php
