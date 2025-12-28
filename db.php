@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . '/projekt/app/config/config.php';
+$config = require __DIR__ . '/projekt/config/config.php';
 
 $connection = mysqli_connect(
     $config['db_host'],           // host

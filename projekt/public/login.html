@@ -9,10 +9,10 @@
     <!--    <link rel="stylesheet" href="/projekt/includes/partials/header.php">-->
     <link rel="stylesheet" href="/projekt/includes/css/custom.css">
     <title>Document</title>
-
 </head>
 <body>
-<!-- Password Reset 9 - Bootstrap Brain Component -->
+<!-- Login 9 - Bootstrap Brain Component -->
+
 <section class="bg-primary py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row gy-4 align-items-center">
@@ -21,8 +21,8 @@
                     <div class="col-12 col-xl-9">
                         <img class="img-fluid rounded mb-4" loading="lazy" src="./assets/img/bsb-logo-light.svg" width="245" height="80" alt="BootstrapBrain Logo">
                         <hr class="border-primary-subtle mb-4">
-                        <h2 class="h1 mb-4">HI THERE!</h2>
-                        <p class="lead mb-5">Complete the form to reset your password</p>
+                        <h2 class="h1 mb-4">WELCOME</h2>
+                        <p class="lead mb-5">Log in to your account to access all features </p>
                         <div class="text-endx">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-grip-horizontal" viewBox="0 0 16 16">
                                 <path d="M2 8a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm3 3a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0-3a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
@@ -36,9 +36,9 @@
                     <div class="card-body p-3 p-md-4 p-xl-5">
                         <div class="row">
                             <div class="col-12">
-                                <div class="mb-4">
-                                    <h2 class="h3" style="color: grey">Password Reset</h2>
-                                    <h3 class="fs-6 fw-normal text-secondary m-0">Provide the email address associated with your account to recover your password.</h3>
+                                <div class="mb-4" style="color: grey">
+                                    <h3>Sign in</h3>
+                                    <p>Don't have an account? <a href="register.php" class="link-primary text-decoration-none">Sign up</a></p>
                                 </div>
                             </div>
                         </div>
@@ -48,11 +48,27 @@
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
                                         <label for="email" class="form-label">Email</label>
+                                        <span id="email_message"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" required>
+                                        <label for="password" class="form-label">Password</label>
+                                        <span id="password_message"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
+                                        <label class="form-check-label text-secondary" for="remember_me">
+                                            Keep me logged in
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg" type="submit">Reset Password</button>
+                                        <button class="btn btn-primary btn-lg" type="button" onclick="login()">Log in now</button>
                                     </div>
                                 </div>
                             </div>
@@ -60,8 +76,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
-                                    <a href="login.html" class="link-secondary text-decoration-none">Login</a>
-                                    <a href="register.php" class="link-secondary text-decoration-none">Register</a>
+                                    <a href="reset_pass.php" class="link-primary text-decoration-none" >Forgot password</a>
                                 </div>
                             </div>
                         </div>
@@ -94,5 +109,53 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    //Validation of data
+    function login(){
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var error = 0;
+        //Validation of email
+        if(!email_regex.test(email) || !email.trim()){
+            $("#email_message").text("E-mail nuk eshte i vendosur sakte");
+            error++;
+        }else{
+            $("#email_message").text("");
+        }
+        //Validation of password
+        if(!password.trim()){
+            $("#password_message").text("Password should be filled");
+            error++;
+        }else{
+            $("#password_message").text("");
+        }
+    }
+    //Create a form data in order to send data to php
+
+    var data = new FormData();
+    data.append("action", "login");
+    data.append("email", email);
+    data.append("password", password);
+
+    //Send data on backend
+    if(error==0){
+        fetch("login.php",{
+            method:"POST",
+            body:data
+        }).then(response=>response.json()).then(response=>{
+            if(response.status==400){
+                window.location.href="home.php";
+            }else{
+                alert(response.message);
+            }
+        })
+    }
+
+
+
+</script>
+
 </body>
 </html>
