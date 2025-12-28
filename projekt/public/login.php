@@ -7,68 +7,77 @@ if($_POST["action"] == "login"){
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);
     $email_regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    $ip_address = $_SERVER['REMOTE_ADDR'] ?? '';
+    $succes=0; //ruan nese logohet apo jo perdoruesi
+    $userId="NULL";
+    $location=null;
+    $statuscode=400;
+    $message="login failed";
+
 
     //Data validation backend
     //email validation
     if(!preg_match($email_regex, $email)){
-        http_response_code(400);
-        $response = array("message"=> "Invalid email");
-        echo json_encode($response);
-        exit;
+        $message="invalid email";
     }
     //password validation
-    if(empty($password)){
-        http_response_code(400);
-        $response = array("message"=>"Password required");
-        echo json_encode($response);
-        exit;
-    }
-    //Check if there is someone with that email on db or not
-    $email_check= "Select * from users where email='$email'";
-    $result = mysqli_query($connection, $email_check);
-    if(!$result){
-        http_response_code(500);
-        //there are 3 categories of errors bcs one is for the users and others for the programer
-        $response = array("status"=>500,
-                           "message"=> "There is an error on db",
-                           "error"=> mysqli_error($connection),
-                           "error_number"=>mysqli_errno($connection));
-        echo json_encode($response);
-        exit;
-    }
-    //If there isnt any user with that email
-    if(mysqli_num_rows($result) == 0){
-        http_response_code(400);
-        $response= array("status"=>400,
-            "message"=>"there is not any user with this email");
-        echo json_encode($response);
-        exit;
-    }
-    $user = mysqli_fetch_assoc($result);
+    else if(empty($password)){
+        $message="invalid password";
+    }else{
+        //Check if there is someone with that email on db or not
+        $email_check= "Select * from users where email='$email'";
+        $result = mysqli_query($connection, $email_check);
+        if(!$result){
+            http_response_code(500);
+            $statuscode=500;
+            $message="There isb an error in db";
+        }
+        //If there isnt any user with that email
+        else if(mysqli_num_rows($result) == 0){
+            $message="There is no user with this email in db";
+        }else{
+            $user = mysqli_fetch_assoc($result);
+            $userId= (int)$user["id"];
 
-    //if there is a user with that email we should check the password
-    if(!password_verify($password, $user["password_hash"])){
-        http_response_code(400);
-        $response = array("message"=> "Wrong password");
-        echo json_encode($response);
-        exit;
-    }
-    //create sessionto save data of user
-    session_start();
-    $_SESSION["id"]=$user['id'];
-    $_SESSION["name"]=$user['name'];
-    $_SESSION["email"]=$user['email'];
-    $_SESSION["role"]=$user['role'];
-    $location="/projekt/includes/home.php";
+            //if there is a user with that email we should check the password
+            if(!password_verify($password, $user["password_hash"])){
+                $message="Wrong passworrd";
+            }else{
+                $succes=1;
+                $statuscode=200;
+                $message="Login successful";
+                //create sessionto save data of user
+                session_start();
+                $_SESSION["id"]=$user['id'];
+                $_SESSION["name"]=$user['name'];
+                $_SESSION["email"]=$user['email'];
+                $_SESSION["role"]=$user['role'];
 
-    if($user["role"]=="admin"){
-        $location="/projekt/admin.php";
+                $location="/projekt/includes/home.php";
+
+                if($user["role"]=="admin"){
+                    $location="/projekt/admin.php";
+                }
+            }
+
+        }
+
     }
-    //nese kemi succses
-    http_response_code(200);
-    echo json_encode(["status" => 200,
-                      "message" => "Login successful",
-                      "redirect" => $location]);
+
+    //put the user attempt to login in loginattempts table
+    mysqli_query($connection,
+                "Insert into login_attempts(user_id, email_entered, ip_address, success, attempt_time)
+                        values($userId, '$email' , '$ip_address', $succes, NOW())");
+    //response for frontend
+    http_response_code($statuscode);
+    if($succes==1){
+        echo json_encode(["status"=>200,
+                          "message"=>$message,
+                           "redirect"=>$location]);
+
+    }else{
+        echo json_encode(["status" => $statuscode, "message" => $message]);
+    }
     exit;
 }
 
