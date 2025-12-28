@@ -44,18 +44,31 @@ if($_POST["action"] == "login"){
         echo json_encode($response);
         exit;
     }
-    $result_email_check = mysqli_fetch_assoc($result);
+    $user = mysqli_fetch_assoc($result);
 
     //if there is a user with that email we should check the password
-    if(!password_verify($password, $result_email_check["password_hash"])){
+    if(!password_verify($password, $user["password_hash"])){
         http_response_code(400);
         $response = array("message"=> "Wrong password");
         echo json_encode($response);
         exit;
     }
+    //create sessionto save data of user
+    session_start();
+    $_SESSION["id"]=$user['id'];
+    $_SESSION["name"]=$user['name'];
+    $_SESSION["email"]=$user['email'];
+    $_SESSION["role"]=$user['role'];
+    $location="/projekt/includes/home.php";
+
+    if($user["role"]=="admin"){
+        $location="/projekt/admin.php";
+    }
     //nese kemi succses
     http_response_code(200);
-    echo json_encode(["status" => 200, "message" => "Login successful"]);
+    echo json_encode(["status" => 200,
+                      "message" => "Login successful",
+                      "redirect" => $location]);
     exit;
 }
 

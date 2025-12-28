@@ -145,7 +145,7 @@
                 body:data
             }).then(response=>response.json()).then(response=>{
                 if(response.status==200){
-                    window.location.href="/projekt/includes/home.php";
+                    window.location.href=response.redirect;
                 }else{
                     alert(response.message);
                 }
