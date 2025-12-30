@@ -58,8 +58,8 @@
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" name="firstName" id="firstName"
                                                    placeholder="First Name" required>
-                                            <span id="name_message" class="float-start text-danger"></span>
                                             <label for="firstName" class="form-label">First Name</label>
+                                            <span id="name_message" class="float-start text-danger"></span>
                                         </div>
                                     </div>
 
@@ -68,8 +68,8 @@
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" name="lastName" id="lastName"
                                                    placeholder="First Name" required>
-                                            <span id="surname_message" class="float-start text-danger"></span>
                                             <label for="lastName" class="form-label">Last Name</label>
+                                            <span id="surname_message" class="float-start text-danger"></span>
                                         </div>
                                     </div>
 
@@ -288,18 +288,11 @@
         if (error > 0) {
             return false;
         }
+    }
 
-//
-//         alert("Registration successful");
-//         return true;
-//
-//     }
 
 </script>
 
-
-
 </body>
-
 
 </html>
