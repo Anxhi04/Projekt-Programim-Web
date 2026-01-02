@@ -38,6 +38,22 @@ if($_POST["action"] == "login"){
         }else{
             $user = mysqli_fetch_assoc($result);
             $userId= (int)$user["id"];
+            //per kerkesen qe pas 7 tentativash te bllokohet
+            //ne momentin qe useri eshte i bllokuar nuk kontrrollohet passwordi
+            if(!empty($user["locked_until"]) && strtotime($user["locked_until"])>time()){
+                $statuscode= 423;//locked
+                $message="Account locked until" . $user["locked_until"];
+                //regjistrojme tentativen
+                mysqli_query($connection, "INSERT INTO login_attempts (user_id, email_entered, ip_address, success, attempt_time)
+                                                  VALUES ($userId, '$email', '$ip_address', 0, Now())");
+                http_response_code($statuscode);
+                echo json_encode([
+                    "status" => $statuscode,
+                    "message" => $message,
+                    "locked_until" => $user["locked_until"],
+                ]);
+                exit;
+            }
 
             //if there is a user with that email we should check the password
             if(!password_verify($password, $user["password_hash"])){
@@ -68,6 +84,36 @@ if($_POST["action"] == "login"){
     mysqli_query($connection,
                 "Insert into login_attempts(user_id, email_entered, ip_address, success, attempt_time)
                         values($userId, '$email' , '$ip_address', $succes, NOW())");
+    //nese jane bere 7 tentativa te gabuara
+    if($succes==0 && $userId!=="NULL"){
+        //numerojme nese jane bere 7 apo jo
+        $count_failed= mysqli_query($connection,
+        "SELECT COUNT(*) AS failed
+        FROM login_attempts
+        WHERE user_id=$userId
+        AND success=0
+        AND attempt_time>=(NOW() - INTERVAL 30 MINUTE)");
+
+        $row = mysqli_fetch_assoc($count_failed);
+        $count=(int)$row["failed"];
+
+        if($count>=7){
+            mysqli_query($connection,
+                "Update users
+        set locked_until=(NOW() + INTERVAL 30 MINUTE)
+        WHERE id=$userId");
+            $statuscode = 423;
+            $message = "Too many failed attempts. Locked for 30 minutes.";
+        }
+
+    }
+    //nese login eshte sukses do bejme reset attempts qe ishin fail
+    if ($succes == 1 && $userId !== "NULL") {
+        mysqli_query($connection, "DELETE FROM login_attempts WHERE user_id = $userId AND success = 0");
+        mysqli_query($connection, "UPDATE users SET locked_until = NULL WHERE id = $userId");
+    }
+
+
     //response for frontend
     http_response_code($statuscode);
     if($succes==1){
@@ -79,6 +125,7 @@ if($_POST["action"] == "login"){
         echo json_encode(["status" => $statuscode, "message" => $message]);
     }
     exit;
+
 }
 
 

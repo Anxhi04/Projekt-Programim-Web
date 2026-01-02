@@ -68,7 +68,9 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-lg" type="button" onclick="login()">Log in now</button>
+                                        <button class="btn btn-primary btn-lg" type="button" onclick="login(event)">Log in now</button>
+                                        <div id="login_status" style="margin-top:10px;"></div>
+
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +114,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     //Validation of data
-    function login(){
+    function login(e){
+        e.preventDefault();
         var email = $("#email").val();
         var password = $("#password").val();
         var email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -140,16 +143,28 @@
 
         //Send data on backend
         if(error==0){
-            fetch("login.php",{
+            fetch("/projekt/public/login.php",{
                 method:"POST",
                 body:data
-            }).then(response=>response.json()).then(response=>{
-                if(response.status==200){
-                    window.location.href=response.redirect;
-                }else{
-                    alert(response.message);
+            }).then(response=>response.json()).then(response=> {
+                if (response.status == 200) {
+                    window.location.href = response.redirect;
+                    return;
                 }
+                console.log("BACKEND RESPONSE:", response);
+
+                if (response.status == 423 && response.locked_until) {
+                    const lockedUntil = new Date(response.locked_until.replace(' ', 'T'));
+                    const now = new Date();
+                    const min_left = Math.max(0, Math.ceil((lockedUntil - now) / 60000));
+                    $("#login_status").text(`Je i/e bllokuar. Provo serish pas ${min_left} minutash.`);
+                    return;
+
+                }
+                $("#login_status").text(response.message || "Login failed");
             })
+                .catch(()=> $("#login_status").text("Gabim ne server. Provo serish."));
+
         }
     }
 

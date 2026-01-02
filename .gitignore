@@ -3,4 +3,4 @@ config/config.php
 /test_db.php
 /projekt/app
 /db.php
-/create_user.php
+/projekt/public/create_user.php
