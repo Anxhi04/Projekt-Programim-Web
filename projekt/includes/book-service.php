@@ -245,10 +245,6 @@ include('header.php')
                              <br>
                              <div class="d-flex flex-wrap gap-2 hidden" id="timeSlots">
                                  <span>Select time:</span>
-                                 <button type="button" class="btn btn-outline-secondary time-slot">09:00</button>
-                                 <button type="button" class="btn btn-outline-secondary time-slot">10:00</button>
-                                 <button type="button" class="btn btn-outline-secondary time-slot">11:00</button>
-                                 <button type="button" class="btn btn-outline-secondary time-slot">12:00</button>
                              </div>
                              <br>
                              <div class="card mb-3 total-info" id="total-info" >
@@ -280,7 +276,7 @@ include('header.php')
                              </div>
                              <br>
                              <div class="d-grid gap-2 d-md-block" >
-                                 <button class="btn btn-primary" id="bookBtn" type="submit">📆Book</button>
+                                 <button class="btn btn-primary" id="bookBtn" type="submit" >📆Book</button>
                              </div>
                          </div>
                      </div>
@@ -288,65 +284,140 @@ include('header.php')
              </form>
 
          <script>
-             document.addEventListener("DOMContentLoaded", ()=>{
+             document.addEventListener("DOMContentLoaded", () => {
                  const cards = document.querySelectorAll(".container .card");
                  const book = document.getElementById("book");
                  const timeslots = document.getElementById("timeSlots");
-                 let values=[];
-
-                 //If a service is clicked this will be directing us on book a service part
-                 cards.forEach(card=>{
-                     card.addEventListener("click", ()=>{
-                         let title = card.querySelector(".card-title").innerText;
-                         values.push(title);
-
-                         book.querySelector(".card-header").innerText=`Book ${title}`;
-                         book.style.display="block";
-                         book.scrollIntoView({
-                             behavior: "smooth",
-                             block:"start"
-                         })
-                     })
-                 })
-
-                 //If the user has put the date is time to select the time so time div is shown
-                 const dateInput =  document.getElementById("dateInput");
-                 dateInput.addEventListener("change", ()=>{
-                     timeslots.classList.remove("hidden");
-                     timeslots.style.display="flex";
-                     console.log(dateInput.value);
-                     values.push(dateInput.value);
-
-                 })
-                 //This is the code part that shows the informations about the booking that the user has done
-                 const timebtn = document.querySelectorAll("#timeSlots .time-slot");
+                 const dateInput = document.getElementById("dateInput");
+                 const bookBtn = document.getElementById("bookBtn");
                  const totalInfo = document.getElementById("total-info");
-                 const bookBtn= document.getElementById("bookBtn");
-                 let selectedtime=null;
-                 timebtn.forEach(btn=>{
-                     btn.addEventListener("click", ()=>{
-                         let infoSpans = document.querySelectorAll('.summary-item .text-end');
-                         values.push(btn.textContent.trim());
-                         values.push(document.querySelector('.price-time span:nth-child(2)').textContent);
-                         values.push(document.querySelector('.price-time span:nth-child(1)').textContent);
 
-                         infoSpans.forEach((span,i)=>{
-                             span.textContent=values[i];
-                         })
-                         totalInfo.classList.remove("total-info");
-                         console.log(selectedtime);
-                         btn.style.background="grey";
-                         btn.style.color="white";
-                         bookBtn.style.display="flex";
-                         totalInfo.scrollIntoView({
-                             behavior: "smooth",
-                             block:"end"
-                         })
+                 //  4 span-at te summary (Service, Date, Time, Duration)
+                 const infoSpans = document.querySelectorAll(".summary-item .text-end");
+                 const totalSpan = document.querySelector(".card-footer .text-end");
+
+                 let selectedServiceTitle = null;
+                 let selectedServiceDuration = null;
+                 let selectedServicePrice = null;
+                 let selectedtime = null;
+
+                 //sigurohet ti kalojme funksionit nje string
+                 function parseMinutes(text) {
+                     return parseInt(String(text).replace(/[^\d]/g, ""), 10);
+                 }
+
+                 // percakton timeslotet sipas sherbimit te zgjedhur
+                 function renderTimeSlots(duration) {
+                     timeslots.innerHTML = "<span>Select time:</span>";
+
+                     const startHour = 9;
+                     const endHour = 20;
+
+                     let startMinutes = startHour * 60;
+                     const endMinutes = endHour * 60;
+                     //kushti qe oraret te jen per aqa koh sa punon dyqani
+                     while (startMinutes + duration <= endMinutes) {
+                         const h = String(Math.floor(startMinutes / 60)).padStart(2, "0");
+                         const m = String(startMinutes % 60).padStart(2, "0");
+                         const timeLabel = `${h}:${m}`;
+
+                         const btn = document.createElement("button");
+                         btn.type = "button";
+                         btn.className = "btn btn-outline-secondary time-slot";
+                         btn.textContent = timeLabel;
+
+                         //kur klikohet btn krijuar
+                         btn.addEventListener("click", () => {
+
+                             timeslots.querySelectorAll(".time-slot").forEach(b => b.classList.remove("active-slot"));
+                             btn.classList.add("active-slot");
+
+                             selectedtime = timeLabel;
+
+                             // plotesojme te dhenat
+                             infoSpans[0].textContent = selectedServiceTitle || "";
+                             infoSpans[1].textContent = dateInput.value || "";
+                             infoSpans[2].textContent = selectedtime || "";
+                             infoSpans[3].textContent = (selectedServiceDuration ? `${selectedServiceDuration} min` : "");
+
+                             if (totalSpan) totalSpan.textContent = (selectedServicePrice ? `${selectedServicePrice}` : "");
+
+                             totalInfo.classList.remove("total-info");
+                             bookBtn.style.display = "inline-block";
+                             totalInfo.scrollIntoView({ behavior: "smooth", block: "end" });
+                         });
+
+                         timeslots.appendChild(btn);
+                         startMinutes += duration;
+                     }
+
+                     timeslots.classList.remove("hidden");
+                     timeslots.style.display = "flex";
+                 }
+
+                 // siguron qe slots te krijohen vtm eshte eshte zgjedh service dhe data
+                 function tryGenerateSlots() {
+                     if (!selectedServiceDuration) return;
+                     if (!dateInput.value) return;
+                     selectedtime = null;
+                     renderTimeSlots(selectedServiceDuration);
+                 }
+
+                 //kur zgjedhim sherbimin
+                 cards.forEach(card => {
+                     card.addEventListener("click", () => {
+                         selectedServiceTitle = card.querySelector(".card-title")?.innerText?.trim() || "";
+
+                         // merr duration dhe price nga card-i i klikuar
+                         const durationText = card.querySelector(".price-time span:nth-child(2)")?.textContent || "";
+                         const priceText = card.querySelector(".price-time span:nth-child(1)")?.textContent || "";
+
+                         selectedServiceDuration = parseMinutes(durationText);
+                         selectedServicePrice = priceText;
 
 
-                     })
-                 })
-             })
+                         book.querySelector(".card-header").innerText = `Book ${selectedServiceTitle}`;
+                         book.style.display = "block";
+                         book.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                         // vendos duration te summary
+                         infoSpans[0].textContent = selectedServiceTitle;
+                         infoSpans[3].textContent = `${selectedServiceDuration} min`;
+                         if (totalSpan) totalSpan.textContent = selectedServicePrice;
+
+                         tryGenerateSlots();
+                     });
+                 });
+
+                 // nese ndryshojme daten
+                 dateInput.addEventListener("change", () => {
+                     infoSpans[1].textContent = dateInput.value;
+                     tryGenerateSlots();
+                 });
+
+                 // kur klikojme book
+                 bookBtn.addEventListener("click", (e) => {
+                     e.preventDefault();
+
+                     if (!selectedServiceTitle || !dateInput.value || !selectedtime) {
+                         alert("Select service, date and time first!");
+                         return;
+                     }
+
+                     const data = new FormData();
+                     data.append("action", "book");
+                     data.append("service", selectedServiceTitle);
+                     data.append("date", dateInput.value);
+                     data.append("time", selectedtime);
+                     data.append("price", selectedServicePrice )
+
+                     fetch("/projekt/includes/bookservicepart2.php", {
+                         method: "POST",
+                         body: data
+                     });
+                 });
+             });
+
 
          </script>
          </body>
