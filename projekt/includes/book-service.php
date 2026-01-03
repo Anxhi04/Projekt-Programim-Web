@@ -118,8 +118,13 @@ include('header.php');
                  btn.classList.add("active-slot");
 
                  selectedTime = timeLabel;
+                     if (new Date(dateInput.value + " " + selectedTime) < new Date()) {
+                         alert("You cannot book in the past");
+                         return;
+                     }
 
-                 // plotesojme te dhenat ne summary
+
+                     // plotesojme te dhenat ne summary
                  infoSpans[0].textContent = selectedServiceTitle || "";
                  infoSpans[1].textContent = dateInput.value || "";
                  infoSpans[2].textContent = selectedTime || "";
@@ -205,7 +210,7 @@ include('header.php');
 
                  // kur ndryshon data
                  dateInput.addEventListener("change", () => {
-                 infoSpans[1].textContent = dateInput.value;
+                     infoSpans[1].textContent = dateInput.value;
                  tryGenerateSlots();
              });
 
