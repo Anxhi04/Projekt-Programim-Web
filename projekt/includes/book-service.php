@@ -232,17 +232,16 @@ include('header.php');
                  method: "POST",
                  body: data
              });
-
-                     const text = await resp.text();
-                     console.log("STATUS:", resp.status);
-                     console.log("RESPONSE:", text);
-
+                 const result = await resp.json();
+                 if(result.status==200){
+                     window.alert("Booking is done we sill send u an email confirmation");
+                 }else if(result.status==300){
+                     window.alert(result.message ||"Booking failed");
+                 }
                      if (!resp.ok) {
                          alert("Gabim nga serveri. Shiko console.");
                          return;
                      }
-
-                     alert("Booking u dergua!");
 
              });
                  try {
