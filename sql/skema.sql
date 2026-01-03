@@ -1,25 +1,10 @@
 --  Reservation Platform DB
 
-CREATE DATABASE IF NOT EXISTS reservation_platform
- DEFAULT CHARACTER SET utf8mb4
- DEFAULT COLLATE utf8mb4_unicode_ci;
-
-USE reservation_platform;
-#SET FOREIGN_KEY_CHECKS = 0;
-
-#DROP TABLE IF EXISTS third_party_logs;
-#DROP TABLE IF EXISTS payments;
-#DROP TABLE IF EXISTS activity_logs;
-#DROP TABLE IF EXISTS password_resets;
-#DROP TABLE IF EXISTS remember_tokens;
-#DROP TABLE IF EXISTS login_attempts;
-#DROP TABLE IF EXISTS reservations;
-#DROP TABLE IF EXISTS service_schedule_slots;
-#DROP TABLE IF EXISTS services;
-#DROP TABLE IF EXISTS businesses;
-#DROP TABLE IF EXISTS users;
-#SET FOREIGN_KEY_CHECKS = 1;
-
+# CREATE DATABASE IF NOT EXISTS reservation_platform
+#   DEFAULT CHARACTER SET utf8mb4
+#   DEFAULT COLLATE utf8mb4_unicode_ci;
+#
+# USE reservation_platform;
 -- 1) USERS
 CREATE TABLE IF NOT EXISTS users (
                        id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -68,8 +53,6 @@ CREATE TABLE IF NOT EXISTS services (
                           employee_user_id INT UNSIGNED NOT NULL,
 
                           name             VARCHAR(150) NOT NULL,
-                          category         VARCHAR(50),
-                          description      TEXT NULL,
                           duration_minutes SMALLINT UNSIGNED NOT NULL,
                           price            DECIMAL(10,2) NOT NULL DEFAULT 0.00,
                           is_active        TINYINT(1) NOT NULL DEFAULT 1,
@@ -262,5 +245,3 @@ CREATE TABLE IF NOT EXISTS third_party_logs (
                                   KEY idx_tpl_provider_time (provider, created_at),
                                   KEY idx_tpl_payment (payment_id)
 ) ENGINE=InnoDB;
-
-
