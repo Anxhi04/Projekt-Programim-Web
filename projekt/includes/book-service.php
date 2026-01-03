@@ -1,5 +1,5 @@
 <?php
-include('header.php')
+include('header.php');
 ?>
 <DOCTYPE html>
     <html>
@@ -218,16 +218,31 @@ include('header.php')
                  return;
              }
                 //dergon te dhenat nga front ne back permes form
+
                  const data = new FormData();
+                 const userId = <?php echo json_encode($_SESSION['user_id'] ?? null); ?>;
+                 const today= new Date().toISOString().split('T')[0];
                  data.append("action", "book");
                  data.append("service_id", selectedServiceId);
                  data.append("date", dateInput.value);
                  data.append("time", selectedTime);
+                 data.append("createdAt", today);
 
-                 const resp = await fetch("/includes/bookservicepart2.php", {
+                 const resp = await fetch("/projekt/includes/bookservicepart2.php", {
                  method: "POST",
                  body: data
              });
+
+                     const text = await resp.text();
+                     console.log("STATUS:", resp.status);
+                     console.log("RESPONSE:", text);
+
+                     if (!resp.ok) {
+                         alert("Gabim nga serveri. Shiko console.");
+                         return;
+                     }
+
+                     alert("Booking u dergua!");
 
              });
                  try {
@@ -237,8 +252,6 @@ include('header.php')
                  container.innerHTML = "<p>gabim gjate ngarkimit te sherbimeve</p>";
              }
              });
-
-
 
          </script>
          </body>
