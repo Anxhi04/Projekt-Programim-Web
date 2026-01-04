@@ -13,16 +13,19 @@ if($_POST["action"] == "login"){
     $location=null;
     $statuscode=400;
     $message="login failed";
+    $action="";//per loget ne db
 
 
     //Data validation backend
     //email validation
     if(!preg_match($email_regex, $email)){
         $message="invalid email";
+        $action="login_failed_validation";
     }
     //password validation
     else if(empty($password)){
         $message="invalid password";
+        $action="login_failed_validation";
     }else{
         //Check if there is someone with that email on db or not
         $email_check= "Select * from users where email='$email'";
@@ -41,6 +44,7 @@ if($_POST["action"] == "login"){
             //per kerkesen qe pas 7 tentativash te bllokohet
             //ne momentin qe useri eshte i bllokuar nuk kontrrollohet passwordi
             if(!empty($user["locked_until"]) && strtotime($user["locked_until"])>time()){
+                $action="login_blocked_active_lock";//na duhet per te ruajtur loget ne db
                 $statuscode= 423;//locked
                 $message="Account locked until" . $user["locked_until"];
                 //regjistrojme tentativen
@@ -58,7 +62,9 @@ if($_POST["action"] == "login"){
             //if there is a user with that email we should check the password
             if(!password_verify($password, $user["password_hash"])){
                 $message="Wrong passworrd";
+                $action="login_failed";
             }else{
+                $action="login_success";
                 $succes=1;
                 $statuscode=200;
                 $message="Login successful";
@@ -86,6 +92,7 @@ if($_POST["action"] == "login"){
                         values($userId, '$email' , '$ip_address', $succes, NOW())");
     //nese jane bere 7 tentativa te gabuara
     if($succes==0 && $userId!=="NULL"){
+        if ($action === "") $action="login_failed";
         //numerojme nese jane bere 7 apo jo
         $count_failed= mysqli_query($connection,
         "SELECT COUNT(*) AS failed
@@ -98,6 +105,7 @@ if($_POST["action"] == "login"){
         $count=(int)$row["failed"];
 
         if($count>=7){
+            $action="login_locked";
             mysqli_query($connection,
                 "Update users
         set locked_until=(NOW() + INTERVAL 30 MINUTE)
@@ -112,6 +120,10 @@ if($_POST["action"] == "login"){
         mysqli_query($connection, "DELETE FROM login_attempts WHERE user_id = $userId AND success = 0");
         mysqli_query($connection, "UPDATE users SET locked_until = NULL WHERE id = $userId");
     }
+    //ruajtja e logeve ne db
+    mysqli_query($connection,"INSERT INTO activity_logs(user_id, action , entity, ip_address, created_at)
+                                     VALUES ($userId, '$action', 'users', '$ip_address', Now())");
+
 
 
     //response for frontend
