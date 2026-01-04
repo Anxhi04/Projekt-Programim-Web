@@ -18,10 +18,9 @@ if (!isset($connection) || !$connection) {
 
 mysqli_set_charset($connection, "utf8mb4");
 
-// 2) business_id nga frontend (ose default 1)
+
 $businessId = isset($_GET['business_id']) ? (int)$_GET['business_id'] : 1;
 
-// 3) query (pa stmt, siç e do ti)
 $sql = "
     SELECT
         id,
@@ -37,7 +36,7 @@ $sql = "
 
 $result = mysqli_query($connection, $sql);
 
-// 4) NËSE DËSHTON -> kthe error JSON me arsyen e saktë
+
 if ($result === false) {
     http_response_code(500);
     echo json_encode([
@@ -49,7 +48,7 @@ if ($result === false) {
     exit;
 }
 
-// 5) kthe rezultatet
+
 $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
