@@ -1,5 +1,5 @@
 <?php
-include('header.php')
+include('header.php');
 ?>
 <DOCTYPE html>
     <html>
@@ -12,227 +12,7 @@ include('header.php')
          <p class="text"> Select a service and choose your prefered date and time</p>
          <br>
              <div class="container">
-                 <div class="card">
-                     <div class="card-header">
-                         Hair
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Haircut & Styling</h5>
-                         <p class="card-text">Professional haircut and styling tailored to your face shape and preferences.</p>
-                         <div class="price-time">
-                             <span>15€</span>
-                             <span>45 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Haircut</h5>
-                         <p class="card-text">Classic or modern haircut customized to your style.</p>
-                         <div class="price-time">
-                             <span>12€</span>
-                             <span>30min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Wash & Blow-Dry</h5>
-                         <p class="card-text">Hair wash with professional products followed by a smooth or voluminous blow-dry.</p>
-                         <div class="price-time">
-                             <span>8€</span>
-                             <span>30min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair Coloring
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Full Hair Coloring</h5>
-                         <p class="card-text">Complete hair coloring using high-quality professional dyes.</p>
-                         <div class="price-time">
-                             <span>30€</span>
-                             <span>90min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair Coloring
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Root Touch Up</h5>
-                         <p class="card-text">Color refresh for roots to maintain an even tone.</p>
-                         <div class="price-time">
-                             <span>20€</span>
-                             <span>60min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair Coloring
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Balayage</h5>
-                         <p class="card-text">Natural-looking highlights for a modern, sun-kissed effect.</p>
-                         <div class="price-time">
-                             <span>80€</span>
-                             <span>120min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Hair Coloring
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Highlights</h5>
-                         <p class="card-text">Classic or modern highlights for added dimension and brightness.</p>
-                         <div class="price-time">
-                             <span>60€</span>
-                             <span>100 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Treatments
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Hair Mask & Treatment</h5>
-                         <p class="card-text">Deep conditioning treatment to restore and nourish damaged hair.</p>
-                         <div class="price-time">
-                             <span>15€</span>
-                             <span>30 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Treatments
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Keratin Treatment</h5>
-                         <p class="card-text">Smoothing treatment that reduces frizz and adds shine.</p>
-                         <div class="price-time">
-                             <span>70€</span>
-                             <span>120 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Treatments
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Botox Hair Treatment</h5>
-                         <p class="card-text">Intensive repair treatment for dry and damaged hair.</p>
-                         <div class="price-time">
-                             <span>50€</span>
-                             <span>90 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Styling
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Blow-Dry Styling</h5>
-                         <p class="card-text">Professional blow-dry for a polished everyday look.</p>
-                         <div class="price-time">
-                             <span>10€</span>
-                             <span>30 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Styling
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Curling / Waves</h5>
-                         <p class="card-text">Soft curls or beach waves for a stylish finish.</p>
-                         <div class="price-time">
-                             <span>12€</span>
-                             <span>30 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Styling
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Hair Straightening</h5>
-                         <p class="card-text">Sleek and smooth straightening using professional tools.</p>
-                         <div class="price-time">
-                             <span>12€</span>
-                             <span>30 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Bridal & Events
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Bridal Hairstyle</h5>
-                         <p class="card-text">Elegant and long-lasting hairstyle for your special day.</p>
-                         <div class="price-time">
-                             <span>60€</span>
-                             <span>90 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Bridal & Events
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Event / Evening Hairstyle</h5>
-                         <p class="card-text">Glamorous hairstyle for parties and special occasions.</p>
-                         <div class="price-time">
-                             <span>30€</span>
-                             <span>60 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Care & Extras
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Hair Consultation</h5>
-                         <p class="card-text">Personalized consultation to choose the best style or treatment.</p>
-                         <div class="price-time">
-                             <span>Free</span>
-                             <span>15 min</span>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card">
-                     <div class="card-header">
-                         Care & Extras
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title">Hair Extensions Consultation</h5>
-                         <p class="card-text">Consultation for hair extensions, color matching and method selection.</p>
-                         <div class="price-time">
-                             <span>Free</span>
-                             <span>20 min</span>
-                         </div>
-                     </div>
-                 </div>
+
              </div>
              <form method="post">
                  <div class="book-info justify-content-center my-4" id="book">
@@ -284,140 +64,193 @@ include('header.php')
              </form>
 
          <script>
-             document.addEventListener("DOMContentLoaded", () => {
-                 const cards = document.querySelectorAll(".container .card");
+                 document.addEventListener("DOMContentLoaded", async () => {
+                 const container = document.querySelector(".container");
                  const book = document.getElementById("book");
                  const timeslots = document.getElementById("timeSlots");
                  const dateInput = document.getElementById("dateInput");
                  const bookBtn = document.getElementById("bookBtn");
                  const totalInfo = document.getElementById("total-info");
 
-                 //  4 span-at te summary (Service, Date, Time, Duration)
+                 // 4 span-at te summary (Service, Date, Time, Duration)
                  const infoSpans = document.querySelectorAll(".summary-item .text-end");
                  const totalSpan = document.querySelector(".card-footer .text-end");
 
+                 let selectedServiceId = null;
                  let selectedServiceTitle = null;
                  let selectedServiceDuration = null;
                  let selectedServicePrice = null;
-                 let selectedtime = null;
+                 let selectedTime = null;
 
-                 //sigurohet ti kalojme funksionit nje string
-                 function parseMinutes(text) {
-                     return parseInt(String(text).replace(/[^\d]/g, ""), 10);
-                 }
 
-                 // percakton timeslotet sipas sherbimit te zgjedhur
+                //sigurojme qe cmimi te jete numer
+                 function formatPrice(p) {
+                 const n = Number(p);
+                 if (Number.isNaN(n)) return "0.00";
+                 return n.toFixed(2);
+             }
+
+                 // TIMESLOTS
                  function renderTimeSlots(duration) {
-                     timeslots.innerHTML = "<span>Select time:</span>";
+                 timeslots.innerHTML = "<span>Select time:</span>";
 
-                     const startHour = 9;
-                     const endHour = 20;
+                 const startHour = 9;
+                 const endHour = 20;
 
-                     let startMinutes = startHour * 60;
-                     const endMinutes = endHour * 60;
-                     //kushti qe oraret te jen per aqa koh sa punon dyqani
-                     while (startMinutes + duration <= endMinutes) {
-                         const h = String(Math.floor(startMinutes / 60)).padStart(2, "0");
-                         const m = String(startMinutes % 60).padStart(2, "0");
-                         const timeLabel = `${h}:${m}`;
+                 let startMinutes = startHour * 60;
+                 const endMinutes = endHour * 60;
 
-                         const btn = document.createElement("button");
-                         btn.type = "button";
-                         btn.className = "btn btn-outline-secondary time-slot";
-                         btn.textContent = timeLabel;
+                 while (startMinutes + duration <= endMinutes) {
+                 const h = String(Math.floor(startMinutes / 60)).padStart(2, "0");
+                 const m = String(startMinutes % 60).padStart(2, "0");
+                 const timeLabel = `${h}:${m}`;
 
-                         //kur klikohet btn krijuar
-                         btn.addEventListener("click", () => {
 
-                             timeslots.querySelectorAll(".time-slot").forEach(b => b.classList.remove("active-slot"));
-                             btn.classList.add("active-slot");
+                 //krijojme butonat ku do ruhen timeslots
 
-                             selectedtime = timeLabel;
+                 const btn = document.createElement("button");
+                 btn.type = "button";
+                 btn.className = "btn btn-outline-secondary time-slot";
+                 btn.textContent = timeLabel;
+                 //kur klikojme nje buton pra orar --> shfaqim summary dhe butoni book
+                 btn.addEventListener("click", () => {
+                 timeslots.querySelectorAll(".time-slot").forEach(b => b.classList.remove("active-slot"));
+                 btn.classList.add("active-slot");
 
-                             // plotesojme te dhenat
-                             infoSpans[0].textContent = selectedServiceTitle || "";
-                             infoSpans[1].textContent = dateInput.value || "";
-                             infoSpans[2].textContent = selectedtime || "";
-                             infoSpans[3].textContent = (selectedServiceDuration ? `${selectedServiceDuration} min` : "");
+                 selectedTime = timeLabel;
 
-                             if (totalSpan) totalSpan.textContent = (selectedServicePrice ? `${selectedServicePrice}` : "");
+                 // plotesojme te dhenat ne summary
+                 infoSpans[0].textContent = selectedServiceTitle || "";
+                 infoSpans[1].textContent = dateInput.value || "";
+                 infoSpans[2].textContent = selectedTime || "";
+                 infoSpans[3].textContent = selectedServiceDuration ? `${selectedServiceDuration} min` : "";
 
-                             totalInfo.classList.remove("total-info");
-                             bookBtn.style.display = "inline-block";
-                             totalInfo.scrollIntoView({ behavior: "smooth", block: "end" });
-                         });
+                 if (totalSpan) totalSpan.textContent = selectedServicePrice != null ? `${formatPrice(selectedServicePrice)}€` : "";
 
-                         timeslots.appendChild(btn);
-                         startMinutes += duration;
-                     }
+                 totalInfo.classList.remove("total-info");
+                 bookBtn.style.display = "inline-block";
+                 totalInfo.scrollIntoView({ behavior: "smooth", block: "end" });
+             });
 
-                     timeslots.classList.remove("hidden");
-                     timeslots.style.display = "flex";
-                 }
+                 timeslots.appendChild(btn);
+                 startMinutes += duration;
+             }
 
-                 // siguron qe slots te krijohen vtm eshte eshte zgjedh service dhe data
+                 timeslots.classList.remove("hidden");
+                 timeslots.style.display = "flex";
+             }
+                 //sigurojme qe oraret te gjenerohen vetem kur kemi zgjedhdur sherbimin dhe daten
                  function tryGenerateSlots() {
-                     if (!selectedServiceDuration) return;
-                     if (!dateInput.value) return;
-                     selectedtime = null;
-                     renderTimeSlots(selectedServiceDuration);
-                 }
+                 if (!selectedServiceDuration) return;
+                 if (!dateInput.value) return;
 
-                 //kur zgjedhim sherbimin
-                 cards.forEach(card => {
-                     card.addEventListener("click", () => {
-                         selectedServiceTitle = card.querySelector(".card-title")?.innerText?.trim() || "";
+                 selectedTime = null;
+                 // fsheh butonin book deri sa t zgjidhet nje orar
+                 bookBtn.style.display = "none";
+                 renderTimeSlots(selectedServiceDuration);
+             }
 
-                         // merr duration dhe price nga card-i i klikuar
-                         const durationText = card.querySelector(".price-time span:nth-child(2)")?.textContent || "";
-                         const priceText = card.querySelector(".price-time span:nth-child(1)")?.textContent || "";
+                 //  SERVICES RENDER --> marrim te dhenat nga backend tik shfaqim ne front
+                 function renderServiceCards(list) {
+                 container.innerHTML = "";
 
-                         selectedServiceDuration = parseMinutes(durationText);
-                         selectedServicePrice = priceText;
+                 list.forEach(service => {
+                 const card = document.createElement("div");
 
+                 card.className = "card";
 
-                         book.querySelector(".card-header").innerText = `Book ${selectedServiceTitle}`;
-                         book.style.display = "block";
-                         book.scrollIntoView({ behavior: "smooth", block: "start" });
+                 card.innerHTML = `
+        <div class="card-header">${service.category ?? ""}</div>
+        <div class="card-body">
+          <h5 class="card-title">${service.name ?? ""}</h5>
+          <p class="card-text">${service.description ?? ""}</p>
+          <div class="price-time">
+            <span>${formatPrice(service.price)}€</span>
+            <span>${service.duration_minutes ?? ""} min</span>
+          </div>
+        </div>
+      `;
 
-                         // vendos duration te summary
-                         infoSpans[0].textContent = selectedServiceTitle;
-                         infoSpans[3].textContent = `${selectedServiceDuration} min`;
-                         if (totalSpan) totalSpan.textContent = selectedServicePrice;
+                 // klik te card-i -> vendos selectedService...
+                 card.addEventListener("click", () => {
+                 selectedServiceId = service.id;
+                 selectedServiceTitle = service.name ?? "";
+                 selectedServiceDuration = Number(service.duration_minutes) || null;
+                 selectedServicePrice = Number(service.price) || 0;
 
-                         tryGenerateSlots();
-                     });
-                 });
+                 book.querySelector(".card-header").innerText = `Book ${selectedServiceTitle}`;
+                 book.style.display = "block";
+                 book.scrollIntoView({ behavior: "smooth", block: "start" });
 
-                 // nese ndryshojme daten
+                 // mbush summary
+                 infoSpans[0].textContent = selectedServiceTitle;
+                 infoSpans[3].textContent = selectedServiceDuration ? `${selectedServiceDuration} min` : "";
+                 if (totalSpan) totalSpan.textContent = `${formatPrice(selectedServicePrice)}€`;
+                 //nese zgjidhet data te gjenerohen oraret
+                 tryGenerateSlots();
+             });
+
+                 container.appendChild(card);
+             });
+             }
+
+                 //  FETCH SERVICES nga db
+                 async function loadServices() {
+
+                 const res = await fetch("/projekt/includes/api/services.php?business_id=1");
+                 if (!res.ok) throw new Error("Nuk u moren services nga serveri");
+                 const list = await res.json();
+                 renderServiceCards(list);
+             }
+
+                 // kur ndryshon data
                  dateInput.addEventListener("change", () => {
-                     infoSpans[1].textContent = dateInput.value;
-                     tryGenerateSlots();
-                 });
+                 infoSpans[1].textContent = dateInput.value;
+                 tryGenerateSlots();
+             });
 
                  // kur klikojme book
-                 bookBtn.addEventListener("click", (e) => {
-                     e.preventDefault();
+                 bookBtn.addEventListener("click", async (e) => {
+                 e.preventDefault();
 
-                     if (!selectedServiceTitle || !dateInput.value || !selectedtime) {
-                         alert("Select service, date and time first!");
+                 if (!selectedServiceId || !dateInput.value || !selectedTime) {
+                 alert("Select service, date and time first!");
+                 return;
+             }
+                //dergon te dhenat nga front ne back permes form
+
+                 const data = new FormData();
+                 const userId = <?php echo json_encode($_SESSION['user_id'] ?? null); ?>;
+                 const today= new Date().toISOString().split('T')[0];
+                 data.append("action", "book");
+                 data.append("service_id", selectedServiceId);
+                 data.append("date", dateInput.value);
+                 data.append("time", selectedTime);
+                 data.append("createdAt", today);
+
+                 const resp = await fetch("/projekt/includes/bookservicepart2.php", {
+                 method: "POST",
+                 body: data
+             });
+                 const result = await resp.json();
+                 if(result.status==200){
+                     window.alert("Booking is done we sill send u an email confirmation");
+                 }else if(result.status==300){
+                     window.alert(result.message ||"Booking failed");
+                 }
+                     if (!resp.ok) {
+                         alert("Gabim nga serveri. Shiko console.");
                          return;
                      }
 
-                     const data = new FormData();
-                     data.append("action", "book");
-                     data.append("service", selectedServiceTitle);
-                     data.append("date", dateInput.value);
-                     data.append("time", selectedtime);
-                     data.append("price", selectedServicePrice )
-
-                     fetch("/projekt/includes/bookservicepart2.php", {
-                         method: "POST",
-                         body: data
-                     });
-                 });
              });
-
+                 try {
+                 await loadServices();
+             } catch (err) {
+                 console.error(err);
+                 container.innerHTML = "<p>gabim gjate ngarkimit te sherbimeve</p>";
+             }
+             });
 
          </script>
          </body>
