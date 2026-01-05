@@ -2,5 +2,4 @@ config/config.php
 .env
 /test_db.php
 /projekt/app
-/db.php
 /projekt/public/create_user.php

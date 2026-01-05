@@ -1,7 +1,3 @@
-<?php
-require_once('../../config/config.php');
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -54,7 +50,7 @@ require_once('../../config/config.php');
                         <div>
                         </div>
                         <!--                            action="login.php"-->
-<!--                        onsubmit="return checkPass()"-->
+                        <!--                        onsubmit="return checkPass()"-->
                         <form class="m-t" role="form" method="post"  id="registerForm">
                             <input type="hidden" id="id" name="id" value="2">
                             <input type="hidden" id="username" name="username" value="test1234">
@@ -136,9 +132,9 @@ require_once('../../config/config.php');
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <button class="btn btn-primary btn-lg" id="register" name="test" type="submit"
-                                                ">Sign up
+                                        ">Sign up
                                         </button>
-<!--                                        onclick="register()-->
+                                        <!--                                        onclick="register()-->
                                     </div>
                                 </div>
                             </div>

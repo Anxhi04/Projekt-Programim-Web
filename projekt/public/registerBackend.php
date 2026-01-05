@@ -1,11 +1,5 @@
 <?php
-require_once('../../config/config.php');
-// lidhja me db(per momentin ndryshojeni manualisht)
-$conn = mysqli_connect("localhost", "root", "", "skema");
-
-if (!$conn) {
-    exit("Database connection failed");
-}
+require_once __DIR__ . '/../../db.php';
 
 $firstname = trim($_POST['firstName'] ?? '');
 $lastname  = trim($_POST['lastName'] ?? '');
@@ -59,7 +53,7 @@ if ($password != $confirmPassword) {
 }
 
 // kontrolloj nese email ekziston ne db
-$check = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ?");
+$check = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
 mysqli_stmt_bind_param($check, "s", $email);
 mysqli_stmt_execute($check);
 mysqli_stmt_store_result($check);
@@ -74,7 +68,7 @@ mysqli_stmt_close($check);
 $query = "INSERT INTO users (firstname, lastname, email, password_hash, created_at)
           VALUES (?, ?, ?, ?, ?)";
 
-$stmt = mysqli_prepare($conn, $query);
+$stmt = mysqli_prepare($connection, $query);
 
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 $createdAt = date("Y-m-d H:i:s");
@@ -104,6 +98,5 @@ if (mysqli_stmt_execute($stmt)) {
 }
 
 mysqli_stmt_close($stmt);
-mysqli_close($conn);
+mysqli_close($connection);
 exit;
-

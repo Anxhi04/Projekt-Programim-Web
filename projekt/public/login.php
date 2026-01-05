@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../../db.php';
 require_once __DIR__ . "/../includes/auth.php";
 
-
 error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
 if($_POST["action"] == "login"  ){
