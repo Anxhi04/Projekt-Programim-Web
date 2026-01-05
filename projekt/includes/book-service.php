@@ -5,6 +5,8 @@ include('partials/header.php');
     <html>
          <head>
              <link href="css\book-service.css" rel="stylesheet">
+             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
          </head>
@@ -120,9 +122,38 @@ include('partials/header.php');
 
                  selectedTime = timeLabel;
                      if (new Date(dateInput.value + " " + selectedTime) < new Date()) {
-                         alert("You cannot book in the past");
+                         Swal.fire({
+                             title: 'Warning!',
+                             text: 'You cannot book in the past',
+                             icon: 'warning'
+                         });
+
                          return;
                      }
+                     if (new Date(dateInput.value + " " + selectedTime) .getDay() == 0 || new Date(dateInput.value + " " + selectedTime).getDay() == 6) {
+                         Swal.fire({
+                             title: 'Warning!',
+                             text: 'You cannot book on weekends',
+                             icon: 'warning'
+                         });
+
+                         return;
+                     }
+                     if (
+                         new Date(`${dateInput.value}T${selectedTime}`) < new Date() ||
+                         new Date(`${dateInput.value}T${selectedTime}`) >
+                         new Date(new Date().setDate(new Date().getDate() + 30))
+                     ) {
+                         Swal.fire({
+                             title: 'Warning!',
+                             text: 'You can only book from now up to 30 days in advance',
+                             icon: 'warning'
+                         });
+
+                         return;
+                     }
+
+
 
 
                      // plotesojme te dhenat ne summary
@@ -220,7 +251,11 @@ include('partials/header.php');
                  e.preventDefault();
 
                  if (!selectedServiceId || !dateInput.value || !selectedTime) {
-                 alert("Select service, date and time first!");
+                     Swal.fire({
+                         title: 'Warning!',
+                         text: 'Select service, date and time first!',
+                         icon: 'warning'
+                     });
                  return;
              }
                 //dergon te dhenat nga front ne back permes form
@@ -240,12 +275,24 @@ include('partials/header.php');
              });
                  const result = await resp.json();
                  if(result.status==200){
-                     window.alert("Booking is done we sill send u an email confirmation");
+                     window.Swal.fire({
+                         title: 'Success!',
+                         text: 'Booking is done we sill send u an email confirmation!',
+                         icon: 'success'
+                     });;
                  }else if(result.status==300){
-                     window.alert(result.message ||"Booking failed");
+                     window.Swal.fire({
+                         title: 'Failed!',
+                         text: result.message || 'Booking failed!',
+                         icon: 'error'
+                     });;;
                  }
                      if (!resp.ok) {
-                         alert("Gabim nga serveri. Shiko console.");
+                         Swal.fire({
+                             title: 'Failed!',
+                             text: 'Gabim nga serveri. Provoni perseri me vone',
+                             icon: 'error'
+                         });;;
                          return;
                      }
 
@@ -261,5 +308,5 @@ include('partials/header.php');
          </script>
          </body>
     </html>
-</DOCTYPE>
+
 
