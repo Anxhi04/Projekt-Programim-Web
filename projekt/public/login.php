@@ -1,9 +1,13 @@
 <?php
 require_once __DIR__ . '/../../db.php';
+require_once __DIR__ . "/../includes/auth.php";
+
 error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
 if($_POST["action"] == "login"){
     //First we get data from front in backend
+    $remember = !empty($_POST["remember_me"]); // true/false
+
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);
     $email_regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -129,6 +133,34 @@ if($_POST["action"] == "login"){
     //response for frontend
     http_response_code($statuscode);
     if($succes==1){
+        if($remember){
+            //krijojme token
+            $token= bin2hex(random_bytes(32));
+            $token_hash= hash("sha256", $token);
+            $expires = date("Y-m-d H:i:s", strtotime("+30 days"));
+            //update token e vjeter
+            mysqli_query($connection,
+                "UPDATE remember_tokens 
+                   SET revoked_at=NOW()
+                   WHERE user_id=$userId
+                   AND revoked_at IS NULL");
+
+            //ruaj token e ri
+            mysqli_query($connection,
+                "INSERT INTO remember_tokens (user_id, token_hash, expires_at, created_at, revoked_at)
+                            VALUES($userId, '$token_hash', '$expires', NOW(), NULL)");
+
+            //vendos cookie
+            setcookie("remember_me", $token, [
+                "expires" => time() + 60*60*24*30,
+                "path" => "/",
+                "secure" => false,
+                "httponly" => true,
+                "samesite" => "Lax",
+            ]);
+
+        }
+
         echo json_encode(["status"=>200,
                           "message"=>$message,
                            "redirect"=>$location]);
@@ -136,6 +168,8 @@ if($_POST["action"] == "login"){
     }else{
         echo json_encode(["status" => $statuscode, "message" => $message]);
     }
+
+
     exit;
 
 }

@@ -1,3 +1,6 @@
 <?php
- include('header.php');
- ?>
+
+require_once __DIR__ . "/partials/header.php";
+
+
+?>

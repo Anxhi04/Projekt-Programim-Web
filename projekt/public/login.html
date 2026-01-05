@@ -59,10 +59,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
+                                    <div class="form-check" >
+                                        <input class="form-check-input" type="checkbox" value=1" name="remember_me" id="remember_me">
                                         <label class="form-check-label text-secondary" for="remember_me">
-                                            Keep me logged in
+                                            Remember me
                                         </label>
                                     </div>
                                 </div>
@@ -116,6 +116,7 @@
     //Validation of data
     function login(e){
         e.preventDefault();
+        const remember= document.getElementById("remember_me").checked;
         var email = $("#email").val();
         var password = $("#password").val();
         var email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -134,12 +135,17 @@
         }else{
             $("#password_message").text("");
         }
+
         //Create a form data in order to send data to php
 
         var data = new FormData();
         data.append("action", "login");
         data.append("email", email);
         data.append("password", password);
+        if (remember) {
+            data.append("remember_me", "1");
+        }
+
 
         //Send data on backend
         if(error==0){

@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . "/auth.php";
+require_once __DIR__ . "/../auth.php";
 ?>
 
     <!DOCTYPE html>
 <html>
      <head>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-         <link href="css/nav.css" rel="stylesheet">
+         <link href="../css/nav.css" rel="stylesheet">
          <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
      </head>
@@ -24,11 +24,11 @@ require_once __DIR__ . "/auth.php";
              </li>
              <li class="nav-item ms-auto">
                  <?php if (isset($_SESSION["id"])): ?>
-                     <a href="/projekt/public/logout.php" class="nav-link active login">
+                     <a href="#" id="logoutLink" class="nav-link active login">
                          Logout
                      </a>
                  <?php else: ?>
-                     <a href="/projekt/public/login.php" class="nav-link active login">
+                     <a href="/projekt/public/login.html" class="nav-link active login">
                          Login
                      </a>
                  <?php endif; ?>
@@ -38,11 +38,22 @@ require_once __DIR__ . "/auth.php";
      </form>
 
      </body>
+     <script>
+         document.getElementById("logoutLink").addEventListener("click", async(e)=>{
+             e.preventDefault();
+
+             await fetch("http://localhost/projekt/public/logout.php", { credentials: "include" });
+
+             window.location.href = "login.html";
+
+         })
+     </script>
 
 </html>
 <?php
     if(isset($_POST['book-service'])){
         header('location:book-service.php');
     }
+
 
 ?>
