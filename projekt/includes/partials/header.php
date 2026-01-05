@@ -1,26 +1,61 @@
 <?php
 require_once __DIR__ . "/../auth.php";
+
+$script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
+$base = preg_replace('#/(public|includes)/.*$#', '', $script); // nxjerr /.../projekt
+
+if (isset($_POST['book-service'])) {
+    header('location:book-service.php');
+}
+
+
 ?>
+<script>
+    const BASE_URL = "<?= $base ?>";
+</script>
 
     <!DOCTYPE html>
 <html>
      <head>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-         <link href="../css/nav.css" rel="stylesheet">
          <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
+         <style>
+             .nav-pills .nav-link.active {
+                 background-color: pink;
+                 color: white;
+             }
+             .nav-pills .nav-item:not(:first-child) .nav-link {
+                 color: pink;
+             }
+             .nav-pills button{
+                 gap: 1%;
+                 margin: 2px;
+             }
+             .nav-pills button:hover{
+                 background: rgba(236, 206, 211, 0.71);
+             }
+             .nav-pills .nav-link.active.login:hover,
+             .nav-pills .nav-item .nav-link:hover{
+                 color: deeppink;
+             }
+
+             .nav-pills .nav-link.active.login{
+                 color: white;
+             }
+         </style>
      </head>
      <body>
      <form method="post">
          <ul class="nav nav-pills mb-3 shadow" id="pills-tab" role="tablist">
              <li class="nav-item" role="presentation">
-                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="submit" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
+                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
              </li>
              <li class="nav-item" role="presentation">
-                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="submit" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
+                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
              </li>
              <li class="nav-item" role="presentation">
-                 <button class="nav-link" id="pills-contact-tab" name="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="submit" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
+                 <button class="nav-link"  name="book-service" id="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
              </li>
              <li class="nav-item ms-auto">
                  <?php if (isset($_SESSION["id"])): ?>
@@ -39,21 +74,26 @@ require_once __DIR__ . "/../auth.php";
 
      </body>
      <script>
-         document.getElementById("logoutLink").addEventListener("click", async(e)=>{
-             e.preventDefault();
+         document.addEventListener('DOMContentLoaded', () => {
 
-             await fetch("http://localhost/projekt/public/logout.php", { credentials: "include" });
+             const logoutLink = document.getElementById('logoutLink');
+             if (logoutLink) {
+                 logoutLink.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     // më thjesht: shko direkt te logout.php (pa fetch)
+                     window.location.href =BASE_URL + "/public/logout.php";
+                 });
+             }
 
-             window.location.href = "login.html";
-
-         })
+             const bookbtn = document.getElementById('book-service');
+             if (bookbtn) {
+                 bookbtn.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     window.location.href =BASE_URL +"/includes/book-service.php";
+                 });
+             }
+         });
      </script>
 
+
 </html>
-<?php
-    if(isset($_POST['book-service'])){
-        header('location:book-service.php');
-    }
-
-
-?>
