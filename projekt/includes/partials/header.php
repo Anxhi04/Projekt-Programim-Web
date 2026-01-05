@@ -49,10 +49,10 @@ if (isset($_POST['book-service'])) {
      <form method="post">
          <ul class="nav nav-pills mb-3 shadow" id="pills-tab" role="tablist">
              <li class="nav-item" role="presentation">
-                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
+                 <button class="nav-link active" id="homebtn" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
              </li>
              <li class="nav-item" role="presentation">
-                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
+                 <button class="nav-link" id="homebtn2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
              </li>
              <li class="nav-item" role="presentation">
                  <button class="nav-link"  name="book-service" id="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
@@ -92,6 +92,20 @@ if (isset($_POST['book-service'])) {
                      window.location.href =BASE_URL +"/includes/book-service.php";
                  });
              }
+             const homebtn = document.getElementById('homebtn');
+                if (homebtn) {
+                    homebtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.location.href =BASE_URL +"/includes/home.php";
+                    });
+                }
+                const homebtn2 = document.getElementById('homebtn2');
+                if (homebtn2) {
+                    homebtn2.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.location.href =BASE_URL +"/includes/home.php";
+                    });
+                }
          });
      </script>
 

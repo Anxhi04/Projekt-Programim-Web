@@ -2,9 +2,10 @@
 require_once __DIR__ . '/../../db.php';
 require_once __DIR__ . "/../includes/auth.php";
 
+
 error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
-if($_POST["action"] == "login"){
+if($_POST["action"] == "login"  ){
     //First we get data from front in backend
     $remember = !empty($_POST["remember_token"]); // true/false
 
@@ -179,10 +180,7 @@ if($_POST["action"] == "login"){
     }else{
         echo json_encode(["status" => $statuscode, "message" => $message]);
     }
-
-
     exit;
-
 }
 
 
