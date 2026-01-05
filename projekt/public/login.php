@@ -6,7 +6,7 @@ error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
 if($_POST["action"] == "login"){
     //First we get data from front in backend
-    $remember = !empty($_POST["remember_me"]); // true/false
+    $remember = !empty($_POST["remember_token"]); // true/false
 
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);
@@ -133,6 +133,17 @@ if($_POST["action"] == "login"){
     //response for frontend
     http_response_code($statuscode);
     if($succes==1){
+        //nese nuk eshte zgjedhur remember me dhe ka token t vjeter
+        if(!$remember && !empty($_COOKIE["remember_token"])){
+            $old_hash=hash("sha256", $_COOKIE["remember_token"]);
+            mysqli_query($connection, "
+            UPDATE remember_tokens
+                SET revoked_at=NOW()
+                WHERE token_hash='$old_hash'");
+            //fshi cookien
+            setcookie("remember_token", "", time() - 3600, "/");
+        }
+        //nese eshte zgjedhur remember me
         if($remember){
             //krijojme token
             $token= bin2hex(random_bytes(32));
@@ -151,7 +162,7 @@ if($_POST["action"] == "login"){
                             VALUES($userId, '$token_hash', '$expires', NOW(), NULL)");
 
             //vendos cookie
-            setcookie("remember_me", $token, [
+            setcookie("remember_token", $token, [
                 "expires" => time() + 60*60*24*30,
                 "path" => "/",
                 "secure" => false,

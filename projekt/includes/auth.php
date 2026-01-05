@@ -3,9 +3,9 @@ session_start();
 require_once __DIR__ . "/../../db.php";
 
 // nese nuk ka session por ka cookie remember_me
-if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_me"])) {
+if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
 
-    $token = $_COOKIE["remember_me"];
+    $token = $_COOKIE["remember_token"];
     $token_hash = hash("sha256", $token);
 
     // kerkojme token aktiv
@@ -44,11 +44,11 @@ if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_me"])) {
 
         } else {
             // user nuk ekziston me
-            setcookie("remember_me", "", time() - 3600, "/");
+            setcookie("remember_token", "", time() - 3600, "/");
         }
 
     } else {
         // token i pavlefshem / skaduar / revokuar
-        setcookie("remember_me", "", time() - 3600, "/");
+        setcookie("remember_token", "", time() - 3600, "/");
     }
 }
