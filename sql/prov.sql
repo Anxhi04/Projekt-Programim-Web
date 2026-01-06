@@ -1,1 +1,1 @@
-Describe businesses
+select * from services
