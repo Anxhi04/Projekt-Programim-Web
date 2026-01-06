@@ -1,5 +1,8 @@
 <?php
+
 require_once __DIR__ . '/../../db.php';
+require_once __DIR__ . '/functions.php';
+
 
 $firstname = trim($_POST['firstName'] ?? '');
 $lastname  = trim($_POST['lastName'] ?? '');
@@ -52,51 +55,147 @@ if ($password != $confirmPassword) {
     exit;
 }
 
-// kontrolloj nese email ekziston ne db
-$check = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
-mysqli_stmt_bind_param($check, "s", $email);
-mysqli_stmt_execute($check);
-mysqli_stmt_store_result($check);
 
-if (mysqli_stmt_num_rows($check) > 0) {
-    exit("Email already exists");
+
+
+/**************************************************************
+ *          KONTROLL NËSE EMAILI EKZISTON NË DATABASE
+ **************************************************************/
+$query_check = "SELECT id
+                    FROM users
+                    WHERE email = '" . $email . "';";
+
+$result_check = mysqli_query($connection, $query_check);
+
+if (!$result_check) {
+    http_response_code(202);
+    $response = array(
+        "message" => "There is an error on Database",
+        "error" => mysqli_error($connection),
+        "error_number" => mysqli_errno($connection)
+    );
+    echo json_encode($response);
+    exit;
 }
 
-mysqli_stmt_close($check);
+// NËSE EKZISTON USER ME KËTË EMAIL
+if (mysqli_num_rows($result_check) > 0) {
+    http_response_code(201);
+    $response = array("message" => "There is a user with that E-Mail");
+    echo json_encode($response);
+    exit;
+}
 
-//insert ne db
-$query = "INSERT INTO users (firstname, lastname, email, password_hash, created_at)
-          VALUES (?, ?, ?, ?, ?)";
 
-$stmt = mysqli_prepare($connection, $query);
+/**************************************************************
+ *              INSERT USER NË DATABASE
+ **************************************************************/
+$query_insert = "INSERT INTO users SET
+                     firstname = '" . $firstname . "',
+                     lastname = '" . $lastname . "',
+                     email = '" . $email . "',
+                     email_code = '" . $email_code . "',
+                     code_date = '" . $valid_date . "',
+                     email_token = '" . $email_token . "',
+                     token_date = '" . $valid_date . "',
+                     password_hash = '" . password_hash($password, PASSWORD_BCRYPT) . "',
+                     created_at = '" . date("Y-m-d H:i:s") . "' ";
 
-$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-$createdAt = date("Y-m-d H:i:s");
+$result_insert = mysqli_query($connection, $query_insert);
 
-mysqli_stmt_bind_param(
-    $stmt,
-    "sssss",
-    $firstname,
-    $lastname,
-    $email,
-    $hashedPassword,
-    $createdAt
+// KONTROLL GABIMI NË INSERT
+if (!$result_insert) {
+    http_response_code(202);
+    $response = array(
+        "message" => "There is an error on Database",
+        "error" => mysqli_error($connection),
+        "error_number" => mysqli_errno($connection)
+    );
+    echo json_encode($response);
+    exit;
+}
+/**
+ * Send E-Mail to user to verify his E-Mail address
+ */
+
+
+$user_id = mysqli_insert_id($connection);
+
+// Përgatisim të dhënat që do dërgohen me email
+$data['code'] = $email_code;
+$data['id'] = $user_id;
+$data['token'] = $email_token;
+$data['user_email'] = $email;
+
+
+sendEmail($data);
+
+
+http_response_code(200);
+$response = array(
+    "message" => "User registered successfully",
+    "location" => "login.php"
 );
-
-if (mysqli_stmt_execute($stmt)) {
-    http_response_code(200);
-    echo json_encode([
-        "success" => true,
-        "message" => "User registered successfully"
-    ]);
-} else {
-    http_response_code(500);
-    echo json_encode([
-        "success" => false,
-        "message" => "Database error"
-    ]);
-}
-
-mysqli_stmt_close($stmt);
-mysqli_close($connection);
+echo json_encode($response);
 exit;
+
+//KJO PJESA LARTE E SAKTE
+
+
+
+//version per zgjidhje me BEST PRACTICES
+
+//// kontrolloj nese email ekziston ne db
+//$check = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
+//mysqli_stmt_bind_param($check, "s", $email);
+//mysqli_stmt_execute($check);
+//mysqli_stmt_store_result($check);
+//
+//if (mysqli_stmt_num_rows($check) > 0) {
+//    exit("Email already exists");
+//}
+//
+//mysqli_stmt_close($check);
+//
+////insert ne db
+//$query = "INSERT INTO users (firstname, lastname, email, password_hash, created_at)
+//          VALUES (?, ?, ?, ?, ?)";
+//
+//$stmt = mysqli_prepare($connection, $query);
+//
+//$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+//$createdAt = date("Y-m-d H:i:s");
+//
+//mysqli_stmt_bind_param(
+//    $stmt,
+//    "sssss",
+//    $firstname,
+//    $lastname,
+//    $email,
+//    $hashedPassword,
+//    $createdAt
+//);
+//
+//if (mysqli_stmt_execute($stmt)) {
+//    http_response_code(200);
+//    echo json_encode([
+//        "success" => true,
+//        "message" => "User registered successfully"
+//    ]);
+//} else {
+//    http_response_code(500);
+//    echo json_encode([
+//        "success" => false,
+//        "message" => "Database error"
+//    ]);
+//}
+//
+//mysqli_stmt_close($stmt);
+//mysqli_close($connection);
+//exit;
+
+
+
+
+
+
