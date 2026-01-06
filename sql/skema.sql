@@ -1,31 +1,37 @@
---  Reservation Platform DB
 
 CREATE DATABASE IF NOT EXISTS reservation_platform
  DEFAULT CHARACTER SET utf8mb4
  DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE reservation_platform;
-#SET FOREIGN_KEY_CHECKS = 0;
-
-#DROP TABLE IF EXISTS third_party_logs;
-#DROP TABLE IF EXISTS payments;
-#DROP TABLE IF EXISTS activity_logs;
-#DROP TABLE IF EXISTS password_resets;
-#DROP TABLE IF EXISTS remember_tokens;
-#DROP TABLE IF EXISTS login_attempts;
-#DROP TABLE IF EXISTS reservations;
-#DROP TABLE IF EXISTS service_schedule_slots;
-#DROP TABLE IF EXISTS services;
-#DROP TABLE IF EXISTS businesses;
-#DROP TABLE IF EXISTS users;
-#SET FOREIGN_KEY_CHECKS = 1;
+# SET FOREIGN_KEY_CHECKS = 0;
+#
+# DROP TABLE IF EXISTS third_party_logs;
+# DROP TABLE IF EXISTS payments;
+# DROP TABLE IF EXISTS activity_logs;
+# DROP TABLE IF EXISTS password_resets;
+# DROP TABLE IF EXISTS remember_tokens;
+# DROP TABLE IF EXISTS login_attempts;
+# DROP TABLE IF EXISTS reservations;
+# DROP TABLE IF EXISTS service_schedule_slots;
+# DROP TABLE IF EXISTS services;
+# DROP TABLE IF EXISTS businesses;
+# DROP TABLE IF EXISTS users;
+# SET FOREIGN_KEY_CHECKS = 1;
 
 -- 1) USERS
 CREATE TABLE IF NOT EXISTS users (
                        id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                       name            VARCHAR(100) NOT NULL,
+                       firstname            VARCHAR(100) NOT NULL,
+                       lastname        varchar(100) Not NULL ,
                        email           VARCHAR(190) NOT NULL,
                        password_hash   VARCHAR(255) NOT NULL,
+                       email_code      varchar(20),
+                       code_date       datetime,
+                       email_token     varchar(255),
+                       token_date      datetime,
+                       email_verified  varchar(5),
+                       email_verified_at datetime,
                        role            ENUM('user','employee','manager','admin') NOT NULL DEFAULT 'user',
                        is_active       TINYINT(1) NOT NULL DEFAULT 1,
 
@@ -122,7 +128,8 @@ CREATE TABLE IF NOT EXISTS reservations (
                               id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                               client_user_id  INT UNSIGNED NOT NULL,
                               service_id      INT UNSIGNED NOT NULL,
-                              slot_id         INT UNSIGNED NOT NULL,
+                              date            datetime,
+                              start_time       time,
 
                               status          ENUM('pending','confirmed','canceled') NOT NULL DEFAULT 'pending',
                               created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -136,14 +143,6 @@ CREATE TABLE IF NOT EXISTS reservations (
                                   FOREIGN KEY (service_id) REFERENCES services(id)
                                       ON UPDATE CASCADE
                                       ON DELETE RESTRICT,
-
-                              CONSTRAINT fk_res_slot
-                                  FOREIGN KEY (slot_id) REFERENCES service_schedule_slots(id)
-                                      ON UPDATE CASCADE
-                                      ON DELETE RESTRICT,
-
-    -- 1 slot = max 1 reservation
-                              UNIQUE KEY uq_reservation_slot (slot_id),
 
                               KEY idx_res_client (client_user_id),
                               KEY idx_res_service (service_id),

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/sql/business.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/emp.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/manager.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/prov.sql" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/sql/services.sql" dialect="MariaDB" />
     <file url="file://$PROJECT_DIR$/sql/skema.sql" dialect="MariaDB" />
   </component>
 </project>

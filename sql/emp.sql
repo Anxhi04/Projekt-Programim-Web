@@ -1,6 +1,6 @@
 USE reservation_platform;
 
-INSERT INTO users (name, email, password_hash, role, is_active)
+INSERT INTO users (firstname, email, password_hash, role, is_active)
 VALUES
     ('Employee 1','emp1@demo.com','x','employee',1),
     ('Employee 2','emp2@demo.com','x','employee',1),
