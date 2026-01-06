@@ -1,86 +1,223 @@
-<?php
-session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <title>Calendar</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap (solid, pa gradient) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- FullCalendar CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet">
+    <!-- FullCalendar core (global build) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
+
+    <!-- FullCalendar Bootstrap 5 theme plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.20/index.global.min.js"></script>
 
     <style>
-        body {
-            padding: 30px;
-            background: rgba(236,206,211,0.53);
+        body{
+            background: rgba(239, 214, 229, 0.8);
+            padding:12px;
         }
-        #calendar {
-            background: #fff;
-            padding: 15px;
-            border-radius: 6px;
+
+        #calendar{
+            max-width: 980px;
+            margin: 0 auto;
+            background:#fff;
+            padding:10px;
+            border-radius:8px;
+            box-shadow:0 6px 16px rgba(91,33,182,.18);
         }
-        .fc-state-active {
-            background-color: rgba(255, 192, 203, 0.88);
-            border-color: #dc8795;
-            color: #ffffff;
+
+        .fc{ font-size: 0.88rem; }
+        .fc .fc-toolbar{ margin-bottom: 8px !important; }
+
+        .fc .fc-toolbar-title{
+            color: rgba(255, 20, 147, 0.8);
+            font-weight:700;
+            font-size: 1.05rem;
         }
+        .fc-next-button,
+        .fc-prev-button{
+            width:35px;
+            height:35px;
+        }
+
+
+        /* vija me te dukshme */
+        .fc-theme-bootstrap5 .fc-scrollgrid,
+        .fc-theme-bootstrap5 td,
+        .fc-theme-bootstrap5 th{
+            border:1.4px solid #c7b6f2 !important;
+        }
+
+        /* header diteve */
+        .fc-col-header-cell{ background:#f0e9ff; }
+        .fc-col-header-cell-cushion{
+            color: rgba(255, 20, 147, 0.65)!important;
+            font-weight:700;
+            padding:6px 0;
+        }
+        .bi{
+            color: white;
+        }
+
+        /* numrat e diteve */
+        .fc .fc-daygrid-day-number{
+            color: rgba(255, 20, 147, 0.8)!important;
+            font-weight:600;
+        }
+
+        /* SOT (nuk e heqim!) */
+        .fc .fc-day-today{
+            background: rgba(236,72,153,.18) !important;
+        }
+
+        .fc .fc-daygrid-day-frame{ padding:2px; }
+
+        /* evente solid */
+        /* EVENTE – roze/lejla te buta */
         .fc-event {
-            background-color: #dc8795 !important;
-            border-color: #dc8795 !important;
-            color: #fff !important;
+            background: rgba(239, 165, 205, 0.62) !important;   /* lejla pastel */
+            border: 1px solid rgb(184, 14, 184) !important;
+            color: rgb(202, 33, 202) !important;        /* tekst lejla e errët */
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-weight: 600;
+            box-shadow: none;
+        }
+
+        /* event alternativ (pak roze, jo forte) */
+        .fc-event.alt {
+            background: rgba(179, 21, 179, 0.52) !important;   /* roze shume e bute */
+            border-color: rgba(255, 20, 147, 0.8) !important;
+            color: rgba(255, 20, 147, 0.8) !important;
+        }
+
+
+
+        /* Ikonat brenda butonave (mos i bej te bardha, se do ngaterroj ngjyrat) */
+        .fc .fc-button .bi{
+            color: purple !important;
+        }
+
+
+
+
+        /* butoni aktiv (month/week/day/list i zgjedhur) */
+        .fc .fc-button.fc-button-active{
+            background-color:#c4b5fd !important;
+            border-color:#a78bfa !important;
+            color:#4c1d95 !important;
+            font-weight:700;
+        }
+
+        /* today pak me i theksuar */
+        .fc .fc-today-button{
+            background-color: #caa9ed !important;
+            border-color: #ab85d1 !important;
+            color:#581c87 !important;
+            font-weight:700;
+        }
+
+        /* prev/next pak me kompakt */
+        .fc .fc-prev-button,
+        .fc .fc-next-button{
+            width:35px;
+            height:35px;
+            padding:0 !important;
+        }
+
+        .btn-group button{
+            background: rgba(179, 102, 179, 0.9) !important;
+            border: purple !important;
+        }
+        .btn-group button:hover{
+            background: #a435a4 !important;
+            border: purple !important;
+        }
+
+
+
+
+
+        /* LIST VIEW styling */
+        .fc .fc-list{ border-radius: 8px; overflow: hidden; }
+        .fc .fc-list-day-cushion{ background: #f0e9ff !important; }
+        .fc .fc-list-day-text,
+        .fc .fc-list-day-side-text{ color:#5b21b6 !important; font-weight:700; }
+
+        .fc .fc-list-event:hover td{ background:#f7f3ff; }
+        .fc .fc-list-event-time,
+        .fc .fc-list-event-title{ color:#5b21b6 !important; font-weight:600; }
+        .fc .fc-list-event-dot{ border-color:#ec4899 !important; }
+        .fc .fc-list-table td,
+        .fc .fc-list-table th{ border-color:#c7b6f2 !important; }
+
+        /* prev / next (shigjetat) */
+        .fc .fc-prev-button,
+        .fc .fc-next-button {
+            background: rgba(179, 102, 179, 0.9) !important;
+            border: purple !important;
+            color: #4c1d95 !important;
         }
 
 
     </style>
 </head>
+
 <body>
+<div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+        <h4 class="m-0" style="color:#5b21b6;font-weight:800;">Kalendar</h4>
+    </div>
 
-<h2>Reservations</h2>
-
-<div id="calendar"></div>
-
-<!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
-<!-- moment.js -->
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-
-<!-- FullCalendar JS -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
+    <div id="calendar"></div>
+</div>
 
 <script>
-    $(document).ready(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
 
-        $('#calendar').fullCalendar({
-            header: {
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap5',
+
+            // default view
+            initialView: 'dayGridMonth',
+
+            // kompakt
+            height: 'auto',
+            contentHeight: 'auto',
+            aspectRatio: 1.75,
+
+            headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' // <-- te katerta
             },
 
+            navLinks: true,
             selectable: true,
-            editable: false,
+            dayMaxEvents: 2,
+
+            // per weekly/daily me kompakt
+            slotMinTime: '08:00:00',
+            slotMaxTime: '20:00:00',
 
             events: [
-                {
-                    title: 'Test Booking',
-                    start: '2026-01-10',
-                    color: '#dc8795',
-                },
-                {
-                    title: 'Another Event',
-                    start: '2026-01-12',
-                    color: 'rgba(255,192,203,0.88)',
-                    end: '2026-01-13'
-                }
-            ]
+                { title: 'Event Rozë', start: '2026-01-07T10:00:00' },
+                { title: 'Event Lejlë', start: '2026-01-09', classNames: ['alt'] },
+                { title: 'Takim', start: '2026-01-10T12:00:00' }
+            ],
+
+            dateClick(info) {
+                alert('Klikove daten: ' + info.dateStr);
+            }
         });
 
+        calendar.render();
     });
 </script>
-
 </body>
 </html>
