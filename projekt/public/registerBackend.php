@@ -128,16 +128,17 @@ $data['token'] = $email_token;
 $data['user_email'] = $email;
 
 
-sendEmail($data);
-
+$email_sent = sendEmail($data);
 
 http_response_code(200);
 $response = array(
-    "message" => "User registered successfully",
+    "success" => true,
+    "message" => "User registered successfully. Please verify your email.",
     "location" => "login.php"
 );
 echo json_encode($response);
 exit;
+
 
 //KJO PJESA LARTE E SAKTE
 
