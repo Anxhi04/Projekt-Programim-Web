@@ -40,7 +40,7 @@ if ($now < $valid_datetime) {
         echo "Error: " . $query_update . "<br>" . mysqli_error($connection);
         exit;
     }
-    echo "<h1>E-Mail verified successfylly</h1>";
+    echo "<h1>E-Mail verified successfully</h1>";
 } else {
     echo "<h1>Token is not valid</h1>";
 }

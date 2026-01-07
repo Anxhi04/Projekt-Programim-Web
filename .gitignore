@@ -4,3 +4,4 @@ config/config.php
 /projekt/app
 /projekt/public/create_user.php
 .idea/
+.env
