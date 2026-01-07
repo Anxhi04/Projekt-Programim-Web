@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/../auth.php";
 
+
+
 $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
 $base = preg_replace('#/(public|includes)/.*$#', '', $script); // nxjerr /.../projekt
 
