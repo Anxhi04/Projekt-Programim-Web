@@ -31,4 +31,22 @@ if (!empty($_COOKIE['remember_me'])) {
             mysqli_stmt_close($stmt);
         }
     }
+    // delete cookie with same params as when created
+    setcookie('remember_me', '', [
+        'expires' => time() - 3600,
+        'path' => '/',
+        'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
 }
+
+// destroy session
+$_SESSION = [];
+session_destroy();
+
+// final redirect
+header('Location: login.html');
+exit;
+
+
