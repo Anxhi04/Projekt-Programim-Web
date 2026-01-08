@@ -1,7 +1,9 @@
 <?php
-session_start();
-require_once __DIR__ . "/../../db.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+require_once __DIR__ . "/../../db.php";
 // nese nuk ka session por ka cookie remember_me
 if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
 

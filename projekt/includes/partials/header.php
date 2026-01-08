@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . "/../auth.php";
 
+
+
 $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
 $base = preg_replace('#/(public|includes)/.*$#', '', $script); // nxjerr /.../projekt
 
 if (isset($_POST['book-service'])) {
-    header('location:book-service.php');
+    header('location:/Projekt-Programim-Web/projekt/includes/book-service.php');
 }
 
 
@@ -63,7 +65,7 @@ if (isset($_POST['book-service'])) {
                          Logout
                      </a>
                  <?php else: ?>
-                     <a href="/projekt/public/login.html" class="nav-link active login">
+                     <a href="Projekt-Programim-Web/projekt/public/login.html" class="nav-link active login">
                          Login
                      </a>
                  <?php endif; ?>
@@ -107,7 +109,9 @@ if (isset($_POST['book-service'])) {
                     });
                 }
          });
+
      </script>
 
 
 </html>
+

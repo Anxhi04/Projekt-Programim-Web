@@ -128,74 +128,15 @@ $data['token'] = $email_token;
 $data['user_email'] = $email;
 
 
-sendEmail($data);
-
+$email_sent = sendEmail($data);
 
 http_response_code(200);
 $response = array(
-    "message" => "User registered successfully",
+    "success" => true,
+    "message" => "User registered successfully. Please verify your email.",
     "location" => "login.php"
 );
 echo json_encode($response);
 exit;
-
-//KJO PJESA LARTE E SAKTE
-
-
-
-//version per zgjidhje me BEST PRACTICES
-
-//// kontrolloj nese email ekziston ne db
-//$check = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
-//mysqli_stmt_bind_param($check, "s", $email);
-//mysqli_stmt_execute($check);
-//mysqli_stmt_store_result($check);
-//
-//if (mysqli_stmt_num_rows($check) > 0) {
-//    exit("Email already exists");
-//}
-//
-//mysqli_stmt_close($check);
-//
-////insert ne db
-//$query = "INSERT INTO users (firstname, lastname, email, password_hash, created_at)
-//          VALUES (?, ?, ?, ?, ?)";
-//
-//$stmt = mysqli_prepare($connection, $query);
-//
-//$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-//$createdAt = date("Y-m-d H:i:s");
-//
-//mysqli_stmt_bind_param(
-//    $stmt,
-//    "sssss",
-//    $firstname,
-//    $lastname,
-//    $email,
-//    $hashedPassword,
-//    $createdAt
-//);
-//
-//if (mysqli_stmt_execute($stmt)) {
-//    http_response_code(200);
-//    echo json_encode([
-//        "success" => true,
-//        "message" => "User registered successfully"
-//    ]);
-//} else {
-//    http_response_code(500);
-//    echo json_encode([
-//        "success" => false,
-//        "message" => "Database error"
-//    ]);
-//}
-//
-//mysqli_stmt_close($stmt);
-//mysqli_close($connection);
-//exit;
-
-
-
-
 
 

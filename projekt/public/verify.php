@@ -1,104 +1,119 @@
 <?php
-echo "<h1>Verify the E-Mail</h1>";
-
 require_once __DIR__ . '/../../db.php';
 
-$user_id = $_GET['id'];
-$email_token = $_GET['token'];
+$user_id = $_GET['id'] ?? null;
+$email_token = $_GET['token'] ?? null;
 
+$status = 'error';
+$message = 'Token is not valid or expired.';
 
-$query_user = "SELECT 
-             id,
-             token_date
-             FROM users 
-             where id = " . $user_id . "
-             AND email_token = '" . $email_token . "'";
+if ($user_id && $email_token) {
 
-$result_user = mysqli_query($connection, $query_user);
-if (!$result_user) {
-    echo "Error: " . $query_user . "<br>" . mysqli_error($connection);
-    exit;
-}
+    $query_user = "
+        SELECT id, token_date 
+        FROM users 
+        WHERE id = '$user_id'
+        AND email_token = '$email_token'
+    ";
 
-$row_user = mysqli_fetch_assoc($result_user);
+    $result_user = mysqli_query($connection, $query_user);
 
+    if ($result_user && mysqli_num_rows($result_user) === 1) {
 
-$valid_datetime = strtotime($row_user['token_date']);
-$now = strtotime(date("Y-m-d H:i:s"));
+        $row_user = mysqli_fetch_assoc($result_user);
 
+        $valid_datetime = strtotime($row_user['token_date']);
+        $now = time();
 
-if ($now < $valid_datetime) {
-    $query_update = "
-                       UPDATE users
-                       set 
-                           email_verified =  'yes',
-                           email_verified_at = '" . date("Y-m-d H:i:s") . "'
-                       WHERE id = '" . $user_id . "'";
+        if ($now < $valid_datetime) {
 
-    $result_update = mysqli_query($connection, $query_update);
-    if (!$result_update) {
-        echo "Error: " . $query_update . "<br>" . mysqli_error($connection);
-        exit;
+            $query_update = "
+                UPDATE users
+                SET 
+                    email_verified = 'yes',
+                    email_verified_at = NOW()
+                WHERE id = '$user_id'
+            ";
+
+            mysqli_query($connection, $query_update);
+
+            $status = 'success';
+            $message = 'Your email has been successfully verified!';
+        }
     }
-    echo "<h1>E-Mail verified successfylly</h1>";
-} else {
-    echo "<h1>Token is not valid</h1>";
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Verification</title>
+    <style>
+        body {
+            background: #f6f6f6;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .verify-container {
+            max-width: 420px;
+            margin: 120px auto;
+            background: #fff;
+            border-radius: 14px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+        }
+
+        .verify-container.success h1 {
+            color: #2ecc71;
+        }
+
+        .verify-container.error h1 {
+            color: #e74c3c;
+        }
+
+        .icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            background: rgba(255,51,153,.9);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: rgba(255,51,153,.7);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="verify-container <?= $status ?>">
+    <div class="icon">
+        <?= $status === 'success' ? '✅' : '❌' ?>
+    </div>
+
+    <h1><?= $status === 'success' ? 'Email Verified' : 'Verification Failed' ?></h1>
+    <p><?= $message ?></p>
+
+    <a href="login.php" class="btn">Go to Login</a>
+</div>
+
+</body>
+</html>
 
 
-
-//version per best practices
-//echo "<h1>Verify the email</h1>";
-//
-//require_once __DIR__ . '/../../db.php';
-////testoj nese po ngarkohet db.php
-////echo "<pre>";
-////var_dump($connection);
-////echo "</pre>";
-//
-//$user_id=$_GET['id'];
-//$email_token=$_GET['token'];
-//
-//$query_user = "
-//    SELECT id,
-//           token_date
-//    FROM users
-//    WHERE id = ?
-//    AND email_token = ?
-//";
-//
-//$stmt = mysqli_prepare($connection, $query_user);
-//mysqli_stmt_bind_param($stmt, "is", $user_id, $email_token);
-//mysqli_stmt_execute($stmt);
-//
-//$result_user = mysqli_stmt_get_result($stmt);
-//
-//if (!$result_user || mysqli_num_rows($result_user) === 0) {
-//    echo "Invalid or expired token";
-//    exit;
-//}
-//
-//$row_user = mysqli_fetch_assoc($result_user);
-//
-//
-//$valid_datetime = strtotime($row_user['token_date']);
-//$now = strtotime(date("Y-m-d H:i:s"));
-//
-//
-//if ($now < $valid_datetime) {
-//    $query_update = "
-//                       UPDATE users
-//                       set
-//                           email_verified =  'yes',
-//                           email_verified_at = '".date("Y-m-d H:i:s")."'
-//                       WHERE id = '".$user_id."'";
-//
-//    $result_update = mysqli_query($connection, $query_update);
-//    if (!$result_update) {
-//        echo "Error: " . $query_update . "<br>" . mysqli_error($connection);
-//        exit;
-//    }
-//    echo "<h1>E-Mail verified successfylly</h1>";
-//} else{
-//    echo "<h1>Token is not valid</h1>";
-//}

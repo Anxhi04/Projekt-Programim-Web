@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . "/../../includes/guard.php";
+?>
 <!doctype html>
 <html lang="sq">
 <head>

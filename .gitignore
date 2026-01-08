@@ -1,6 +1,7 @@
 config/config.php
-.env
+config/url.php
 /test_db.php
 /projekt/app
 /projekt/public/create_user.php
 .idea/
+
