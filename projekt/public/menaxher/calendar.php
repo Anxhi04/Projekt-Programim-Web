@@ -177,7 +177,17 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded',async function () {
+        //marrim rezervimet qe jane bere nga endpointi jon
+        const book_res = await fetch("api/calendar_events.php");
+        const events = await book_res.json();
+        console.log(events);
+
+        //aksesojme qelizat e datave ne kalendar
+        const cell = document.getElementsByTagName("td");
+        console.log(cell);
+
+
         const calendarEl = document.getElementById('calendar');
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -217,7 +227,10 @@
         });
 
         calendar.render();
+
     });
+
 </script>
+
 </body>
 </html>

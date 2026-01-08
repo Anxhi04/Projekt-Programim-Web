@@ -4,7 +4,8 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/../../../db.php'; // <- kjo është rruga e saktë sipas screenshot-it tënd
+require_once __DIR__ . '/../../../db.php';
+
 
 // 1) kontrollo lidhjen
 if (!isset($connection) || !$connection) {

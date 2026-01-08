@@ -5,15 +5,31 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db.php';
 header('Content-Type: application/json');
 //query nga e cila mnarrim t dhenat per eventet ne kalendar
 
+//kontrollo lidhjen
+if(!isset($connection)|| !$connection){
+    http_response_code(500);
+    echo json_encode([
+        "error" => "No DB connection",
+        "details" => "Check db.php (host/user/pass/port/db)"
+    ]);
+    exit;
+}
+
+
 $sql =  mysqli_query($connection, "
-  SELECT 
-    r.id,
-    s.name AS service_name,
-    DATE(r.created_at) AS day,          -- p.sh. 2026-01-05 (ose reservation_date)
-    r.start_time,    -- p.sh. 10:00:00
-    s.duration_minutes       -- minuta (ose r.duration)
-  FROM reservations r
-  JOIN services s ON s.id = r.service_id
+ SELECT
+  r.id,
+  s.name AS service_name,
+  DATE(r.date) AS day,
+  r.start_time,
+  s.duration_minutes,
+  u.firstname AS user_employee
+FROM reservations r
+JOIN services s ON s.id = r.service_id
+JOIN users u ON u.id = s.employee_user_id
+WHERE u.role = 'employee'
+ORDER BY r.date, r.start_time;
+
 ");
 if (!$sql) {
     http_response_code(500);
@@ -22,19 +38,29 @@ if (!$sql) {
 }
 $events = [];
 
+//echo "NUM ROWS: " . mysqli_num_rows($sql) . "\n\n";
+//while($row = mysqli_fetch_assoc($sql)) {
+//    echo "<pre>";
+//    print_r($row);
+//    echo "</pre>\n\n";
+//}
+
+
 while ($row = mysqli_fetch_assoc($sql)) {
     $start = $row["day"] . " " . $row["start_time"];
     $minutes = (int)$row["duration_minutes"];
     $end = date('Y-m-d H:i:s', strtotime($start . " +{$minutes} minutes"));
+    $employee = $row["user_employee"];
 
     $events[] = [
         "id"    => (int)$row["id"],
         "title" => $row["service_name"],
         "start" => $start,
         "end"   => $end,
-        "color" => "#8a2be2" // lejlas (opsionale)
+        "employee" => $employee
     ];
 }
 
-//echo json_encode($events);
+
+echo json_encode($events);
 
