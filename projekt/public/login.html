@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,9 +6,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/projekt/includes/css/bootstrap.min.css">
-    <!--    <link rel="stylesheet" href="/projekt/includes/partials/header.php">-->
-    <link rel="stylesheet" href="/projekt/includes/css/custom.css">
+    <!--    &lt;!&ndash;    <link rel="stylesheet" href="/projekt/includes/partials/header.php">&ndash;&gt;-->
+    <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/custom.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -78,7 +80,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
-                                    <a href="reset_pass.php" class="link-primary text-decoration-none" >Forgot password</a>
+                                    <a href="/Projekt-Programim-Web/projekt/public/reset_pass.php" class="link-primary text-decoration-none" >Forgot password</a>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +151,7 @@
 
         //Send data on backend
         if(error==0){
-            fetch("/projekt/public/login.php",{
+            fetch("/Projekt-Programim-Web/projekt/public/login.php",{
                 method:"POST",
                 body:data
             }).then(response=>response.json()).then(response=> {

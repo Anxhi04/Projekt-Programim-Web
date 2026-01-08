@@ -6,6 +6,7 @@ include('partials/header.php');
     <html>
          <head>
              <link href="css\book-service.css" rel="stylesheet">
+<!--             <link href="/Projekt-Programim-Web/projekt/includes/css/book-service.css" rel="stylesheet">-->
              <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -235,7 +236,7 @@ include('partials/header.php');
                  //  FETCH SERVICES nga db
                  async function loadServices() {
 
-                 const res = await fetch("/projekt/includes/api/services.php?business_id=1");
+                 const res = await fetch("/Projekt-Programim-Web/projekt/includes/api/services.php?business_id=1");
                  if (!res.ok) throw new Error("Nuk u moren services nga serveri");
                  const list = await res.json();
                  renderServiceCards(list);
@@ -270,7 +271,7 @@ include('partials/header.php');
                  data.append("time", selectedTime);
                  data.append("createdAt", today);
 
-                 const resp = await fetch("/projekt/includes/bookservicepart2.php", {
+                 const resp = await fetch("/Projekt-Programim-Web/projekt/includes/bookservicepart2.php", {
                  method: "POST",
                  body: data
              });

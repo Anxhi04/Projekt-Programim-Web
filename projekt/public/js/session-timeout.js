@@ -5,11 +5,11 @@ setInterval(() => {
     idleTime++;
 
     if (idleTime >= MAX_IDLE_TIME) {
-        fetch("/projekt/public/logout.php", {
+        fetch("/Projekt-Programim-Web/projekt/public/logout.php", {
             method: "POST",
             credentials: "same-origin"
         }).finally(() => {
-            window.location.replace("/projekt/public/login.html?timeout=1");
+            window.location.replace("/Projekt-Programim-Web/projekt/public/login.html?timeout=1");
         });
     }
 }, 1000);
