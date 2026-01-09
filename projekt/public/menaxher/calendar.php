@@ -189,21 +189,12 @@
                             <div id='external-events'>
                                 <p>Drag a event and drop into callendar.</p>
                                 <div class='external-event navy-bg'>Go to shop and buy some products.</div>
-                                <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
+                                <div class='external-event navy-bg'>Check if produkts are missing</div>
                                 <div class='external-event navy-bg'>Send documents to John.</div>
                                 <div class='external-event navy-bg'>Phone to Sandra.</div>
                                 <div class='external-event navy-bg'>Chat with Michael.</div>
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="ibox ">
-                        <div class="ibox-content">
-                            <h2>FullCalendar</h2> is a jQuery plugin that provides a full-sized, drag & drop calendar like the one below. It uses AJAX to fetch events on-the-fly for each month and is
-                            easily configured to use your own feed format (an extension is provided for Google Calendar).
-                            <p>
-                                <a href="http://arshaw.com/fullcalendar/" target="_blank">FullCalendar documentation</a>
-                            </p>
                         </div>
                     </div>
                 </div>
