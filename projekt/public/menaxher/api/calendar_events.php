@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/db.php';
 
 header('Content-Type: application/json');
 //query nga e cila mnarrim t dhenat per eventet ne kalendar
+date_default_timezone_set('Europe/Tirane');
 
 //kontrollo lidhjen
 if(!isset($connection)|| !$connection){
@@ -36,8 +37,7 @@ if (!$sql) {
     exit;
 }
 $events = [];
-
-//echo "NUM ROWS: " . mysqli_num_rows($sql) . "\n\n";
+//
 //while($row = mysqli_fetch_assoc($sql)) {
 //    echo "<pre>";
 //    print_r($row);
@@ -46,17 +46,25 @@ $events = [];
 
 
 while ($row = mysqli_fetch_assoc($sql)) {
+
     $start = $row["day"] . " " . $row["start_time"];
     $minutes = (int)$row["duration_minutes"];
-    $end = date('Y-m-d H:i:s', strtotime($start . " +{$minutes} minutes"));
+
+    $start_timestamp = strtotime($start);
+    $end_timestamp = $start_timestamp + ($minutes * 60);
     $employee = $row["user_employee"];
 
+
+
     $events[] = [
-        "id"    => (int)$row["id"],
-        "title" => $row["service_name"],
-        "start" => $start,
-        "end"   => $end,
-        "employee" => $employee
+        "id" => (int)$row["id"],
+        "title" => $row["service_name"] ,
+        "start" => date('Y-m-d\TH:i:s', $start_timestamp),
+        "end" => date('Y-m-d\TH:i:s', $end_timestamp),
+        "color" => "#FF69B4",
+        "textColor" => "#ffffff",
+        "allDay" => false,
+        "employee" => $row["user_employee"],
     ];
 }
 

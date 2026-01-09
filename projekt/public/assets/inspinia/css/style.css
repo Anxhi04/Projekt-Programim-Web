@@ -2212,8 +2212,8 @@ button.dim:active:before {
   white-space: nowrap;
 }
 .fc-state-active {
-  background-color: #1ab394;
-  border-color: #1ab394;
+  background-color: rgba(255, 20, 147, 0.8);
+  border-color: rgba(255, 20, 147, 0.84);
   color: #ffffff;
 }
 .fc-header-title h2 {
@@ -5010,7 +5010,7 @@ table.table-mail tr td {
 }
 .navy-bg,
 .bg-primary {
-  background-color: #1ab394 !important;
+  background-color: rgba(255, 192, 203, 0.88) !important;
   color: #ffffff;
 }
 .lazur-bg,
@@ -8262,8 +8262,8 @@ body.landing-page {
   color: #fff;
 }
 .landing-page .btn-primary {
-  background-color: #1ab394;
-  border-color: #1ab394;
+  background-color: rgba(255, 20, 147, 0.84);
+  border-color: rgba(255, 20, 147, 0.8);
   color: #FFFFFF;
   font-size: 14px;
   padding: 10px 20px;
