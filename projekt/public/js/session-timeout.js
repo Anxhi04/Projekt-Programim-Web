@@ -9,7 +9,7 @@ setInterval(() => {
             method: "POST",
             credentials: "same-origin"
         }).finally(() => {
-            window.location.replace("/Projekt-Programim-Web/projekt/public/login.html?timeout=1");
+            window.location.replace("/Projekt-Programim-Web/projekt/public/login.php?timeout=1");
         });
     }
 }, 1000);
