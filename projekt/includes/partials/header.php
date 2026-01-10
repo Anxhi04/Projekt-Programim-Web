@@ -23,6 +23,17 @@ if (isset($_POST['book-service'])) {
          <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
          <style>
+
+
+             body.homepage .nav {
+                 position: fixed;
+                 top: 0;
+                 left: 0;
+                 width: 100%;
+                 z-index: 9999;
+             }
+
+
              .nav-pills .nav-link.active {
                  background-color: pink;
                  color: white;
@@ -51,7 +62,7 @@ if (isset($_POST['book-service'])) {
      <form method="post">
          <ul class="nav nav-pills mb-3 shadow" id="pills-tab" role="tablist">
              <li class="nav-item" role="presentation">
-                 <button class="nav-link active" id="homebtn" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Beauty Center</button>
+                 <button class="nav-link active" id="homebtn" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">GlamBook</button>
              </li>
              <li class="nav-item" role="presentation">
                  <button class="nav-link" id="homebtn2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
@@ -98,7 +109,7 @@ if (isset($_POST['book-service'])) {
                 if (homebtn) {
                     homebtn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        window.location.href =BASE_URL +"/includes/home.php";
+                        window.location.href =BASE_URL +"/includes/mainHome.php";
                     });
                 }
                 const homebtn2 = document.getElementById('homebtn2');
