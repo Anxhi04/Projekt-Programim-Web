@@ -267,7 +267,7 @@ if($_POST["action"] == "login"  ){
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
-                                    <a href="/Projekt-Programim-Web/projekt/public/reset_pass.php" class="link-primary text-decoration-none" >Forgot password</a>
+                                    <a href="/Projekt-Programim-Web/projekt/public/forgot_pass.php" class="link-primary text-decoration-none" >Forgot password</a>
                                 </div>
                             </div>
                         </div>

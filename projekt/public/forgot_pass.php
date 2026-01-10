@@ -39,12 +39,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-4">
-                                    <h2 class="h3" style="color: grey">Password Reset</h2>
+                                    <h2 class="h3" style="color: grey"> Forgot Password</h2>
                                     <h3 class="fs-6 fw-normal text-secondary m-0">Provide the email address associated with your account to recover your password.</h3>
                                 </div>
                             </div>
                         </div>
-                        <form action="#!">
+                        <form action="/Projekt-Programim-Web/projekt/public/api/send_reset.php" method="POST">
                             <div class="row gy-3 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
