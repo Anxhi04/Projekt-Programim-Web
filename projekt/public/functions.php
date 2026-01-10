@@ -10,6 +10,7 @@ require_once __DIR__ . '/../../PHPMailer/PHPMailer/src/SMTP.php';
 function sendEmail($data){
 
     $config=require __DIR__ . '/../../config/url.php';
+    $mailConfig=require __DIR__ . '/../../config/mailer.php';
 
     $verifyUrl =
         $config['BASE_URL'] .
@@ -29,7 +30,7 @@ function sendEmail($data){
         $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth = true;                                   //Enable SMTP authentication
         $mail->Username = 'verifyGlamBook@gmail.com';                     //SMTP username
-        $mail->Password = 'vogp shwt leod euox';                               //SMTP password
+        $mail->Password = $mailConfig['smtp_password'];                               //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
