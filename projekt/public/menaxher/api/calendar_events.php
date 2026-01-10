@@ -17,17 +17,30 @@ if(!isset($connection)|| !$connection){
 
 
 $sql =  mysqli_query($connection, "
- SELECT
-  r.id,
-  s.name AS service_name,
-  DATE(r.date) AS day,
-  r.start_time,
-  s.duration_minutes,
-  u.firstname AS user_employee
+SELECT
+    -- RESERVATION
+    r.id,
+    r.status AS reservation_status,
+    s.name AS service_name,
+    DATE(r.date) AS day,
+    r.start_time,
+    s.duration_minutes,
+    r.status,
+
+    -- USER 
+    uc.email AS user_email,
+
+    -- EMPLOYEE 
+    ue.firstname AS user_employee
+
 FROM reservations r
-JOIN services s ON s.id = r.service_id
-JOIN users u ON u.id = s.employee_user_id
-WHERE u.role = 'employee'
+JOIN services s 
+    ON s.id = r.service_id
+JOIN users uc 
+    ON uc.id = r.client_user_id
+JOIN users ue 
+    ON ue.id = s.employee_user_id
+
 ORDER BY r.date, r.start_time;
 
 ");
@@ -58,6 +71,9 @@ while ($row = mysqli_fetch_assoc($sql)) {
 
     $events[] = [
         "id" => (int)$row["id"],
+        "status" => $row["reservation_status"],
+        "user_email" => $row["user_email"],
+        "service_name" => $row["service_name"],
         "title" => $row["service_name"] ,
         "start" => date('Y-m-d\TH:i:s', $start_timestamp),
         "end" => date('Y-m-d\TH:i:s', $end_timestamp),
@@ -65,6 +81,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
         "textColor" => "#ffffff",
         "allDay" => false,
         "employee" => $row["user_employee"],
+        "from_db" => true
     ];
 }
 
