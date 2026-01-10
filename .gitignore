@@ -1,5 +1,6 @@
 config/config.php
 config/url.php
+config/mailer.php
 /test_db.php
 /projekt/app
 /projekt/public/create_user.php
