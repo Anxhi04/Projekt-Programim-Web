@@ -271,8 +271,9 @@
         } else {
             $("#email").removeClass("border-danger")
             $("#email_message").text("");
-        }
 
+        }
+// TODO beje me regex validimin
         // Validimi i pass
         if (password.trim() === "") {
             $("#password").addClass("border-danger");

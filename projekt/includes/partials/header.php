@@ -25,14 +25,14 @@ if (isset($_POST['book-service'])) {
          <style>
 
 
-             body.homepage .nav {
+             body.homepage .nav
+            {
                  position: fixed;
                  top: 0;
                  left: 0;
                  width: 100%;
                  z-index: 9999;
              }
-
 
              .nav-pills .nav-link.active {
                  background-color: pink;
@@ -67,9 +67,9 @@ if (isset($_POST['book-service'])) {
              <li class="nav-item" role="presentation">
                  <button class="nav-link" id="homebtn2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
              </li>
-             <li class="nav-item" role="presentation">
-                 <button class="nav-link"  name="book-service" id="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>
-             </li>
+<!--             <li class="nav-item" role="presentation">-->
+<!--                 <button class="nav-link"  name="book-service" id="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>-->
+<!--             </li>-->
              <li class="nav-item ms-auto">
                  <?php if (isset($_SESSION["id"])): ?>
                      <a href="#" id="logoutLink" class="nav-link active login">
@@ -116,7 +116,7 @@ if (isset($_POST['book-service'])) {
                 if (homebtn2) {
                     homebtn2.addEventListener('click', (e) => {
                         e.preventDefault();
-                        window.location.href =BASE_URL +"/includes/home.php";
+                        window.location.href =BASE_URL +"/includes/businesses.php";
                     });
                 }
          });

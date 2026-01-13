@@ -77,7 +77,8 @@ if($_POST["action"] == "login"  ){
                 $_SESSION["email"]=$user['email'];
                 $_SESSION["role"]=$user['role'];
 
-                $location="/Projekt-Programim-Web/projekt/includes/home.php";
+//                $location="/Projekt-Programim-Web/projekt/includes/home.php";
+                $location="/Projekt-Programim-Web/projekt/includes/mainHome.php";
 
                 if($user["role"]=="admin"){
                     $location="/Projekt-Programim-Web/projekt/admin.php";
