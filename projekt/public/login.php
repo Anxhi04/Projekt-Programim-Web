@@ -4,7 +4,7 @@ error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
 if($_POST["action"] == "login"  ){
     //First we get data from front in backend
-    $remember = !empty($_POST["remember_token"]); // true/false
+    $remember = !empty($_POST["remember_me"]); // true/false
 
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);

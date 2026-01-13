@@ -3,21 +3,73 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Redirection
+require_once __DIR__ . "/../../db.php";
+
+// -------------------- Remember Me HANDLER --------------------
+if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
+
+    $token = $_COOKIE["remember_token"];
+    $token_hash = hash("sha256", $token);
+
+    $sql = "SELECT user_id
+            FROM remember_tokens
+            WHERE token_hash = '$token_hash'
+              AND expires_at > NOW()
+              AND revoked_at IS NULL
+            LIMIT 1";
+
+    $result = mysqli_query($connection, $sql);
+
+    if ($result && mysqli_num_rows($result) == 1) {
+
+        $row = mysqli_fetch_assoc($result);
+        $userId = (int)$row["user_id"];
+
+        $userRes = mysqli_query(
+            $connection,
+            "SELECT id, name, email, role
+             FROM users
+             WHERE id = $userId
+             LIMIT 1"
+        );
+
+        if ($userRes && mysqli_num_rows($userRes) == 1) {
+            $user = mysqli_fetch_assoc($userRes);
+
+            // krijo session-in
+            $_SESSION["id"] = $user["id"];
+            $_SESSION["name"] = $user["name"];
+            $_SESSION["email"] = $user["email"];
+            $_SESSION["role"] = $user["role"];
+
+        } else {
+            // fshi cookie sepse user s’ekziston me
+            setcookie("remember_token", "", time() - 3600, "/");
+        }
+    } else {
+        // fshi cookie sepse tokeni nuk vlen
+        setcookie("remember_token", "", time() - 3600, "/");
+    }
+}
+
+// -------------------- SESSION CHECK --------------------
 if (!isset($_SESSION["id"])) {
-    header("Location:/Projekt-Programim-Web/projekt/public/login.php");
+    header("Location: /Projekt-Programim-Web/projekt/public/login.php");
     exit;
 }
 
-$timeout = 15*60;
+// -------------------- SESSION TIMEOUT --------------------
+$timeout = 15*60; // 15 minuta
 
-// Timeout session
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout) {
-    session_unset();
-    session_destroy();
-    header("Location:/Projekt-Programim-Web/projekt/public/login.php");
-    exit;
+if (isset($_SESSION["LAST_ACTIVITY"]) && (time() - $_SESSION["LAST_ACTIVITY"]) > $timeout) {
+
+    // nese ka remember_me mos e shkatërro session
+    if (empty($_COOKIE["remember_token"])) {
+        session_unset();
+        session_destroy();
+        header("Location: /Projekt-Programim-Web/projekt/public/login.php");
+        exit;
+    }
 }
 
-$_SESSION['LAST_ACTIVITY'] = time();
-
+$_SESSION["LAST_ACTIVITY"] = time();
