@@ -46,7 +46,7 @@ $_SESSION = [];
 session_destroy();
 
 // final redirect
-header('Location: login.html');
+header('Location: login.php');
 exit;
 
 

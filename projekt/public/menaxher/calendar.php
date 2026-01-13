@@ -171,8 +171,8 @@
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
                                 </a>
-                               <a>
-                                   <button class="btn" data-toggle="modal" data-target="#myModal14" style="background: none">Add event</button>                               </a>
+                                <a>
+                                    <button class="btn" data-toggle="modal" data-target="#myModal14" style="background: none">Add event</button>                               </a>
 
                                 <ul class="dropdown-menu dropdown-user">
                                     <li><a href="#" class="dropdown-item">Config option 1</a>
@@ -303,7 +303,18 @@
                     droppable: true,
                     events: eventsdata,
                     eventClick: function(calEvent, jsEvent, view) {
-                        console.log("Description value:", calEvent.Description);
+                        let actionButtons = '';
+                        console.log("Clicked event data:", calEvent);
+                        //keto butona do duken vetem nese eventi eshte nga db dhe statusi eshte pending
+                        if (calEvent.from_db && calEvent.status === 'pending') {
+
+                            actionButtons = `
+                                   <hr>
+                                   <button id="confirmBtn" class="btn  btn-sm" >Confirm</button>
+                                   <button id="cancelBtn" class="btn btn-white btn-sm">Cancel</button>
+                               `;
+                        }
+
 
                         Swal.fire({
                             title: calEvent.title,
@@ -323,7 +334,15 @@
                                 ${(calEvent.description && calEvent.description !== "NULL" && calEvent.description.trim() !== "")
                                 ? `<p><strong>Description:</strong> ${calEvent.description}</p>`
                                 : ''}
+                                ${(calEvent.status && calEvent.status !== "NULL" && calEvent.status.trim() !== "")
+                                ? `<p><strong>Status:</strong> ${calEvent.status}</p>`
+                                : ''}
+
                             </div>
+                              <div style="text-align:left;">
+                               ...
+                             ${actionButtons}
+                          </div>
                         `,
                             icon: 'info',
                             confirmButtonText: 'Close',
@@ -331,6 +350,16 @@
                                 container: 'swal2-container-custom'
                             }
                         });
+                        setTimeout(() => {
+                            document.getElementById('confirmBtn')?.addEventListener('click', () => {
+                                updateReservation(calEvent, 'confirmed');
+                            });
+
+                            document.getElementById('cancelBtn')?.addEventListener('click', () => {
+                                updateReservation(calEvent, 'canceled');
+                            });
+                        }, 200);
+
                     },
                     drop: function() {
                         if ($('#drop-remove').is(':checked')) {
@@ -340,6 +369,29 @@
                 });
             })
             .catch(error => console.error("Error:", error));
+        function updateReservation(event, status) {
+            console.log("Updating reservation:", event.id, "to status:", status);
+            fetch('/projekt/public/menaxher/api/update_reservation.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: event.id,
+                    status: status,
+                    email: event.user_email
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Success', data.message, 'success');
+                        event.status = status;
+                        $('#calendar').fullCalendar('updateEvent', event);
+                    } else {
+                        Swal.fire('Error', 'Something went wrong', 'error');
+                    }
+                });
+        }
+
 
         // Button click handler
         document.getElementById('saveNewEventBtn').addEventListener('click', function() {

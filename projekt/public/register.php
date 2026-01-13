@@ -9,6 +9,7 @@
     <!--    <link rel="stylesheet" href="/projekt/includes/partials/header.php">-->
     <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/custom.css">
     <title>WELCOME</title>
+
 </head>
 <body>
 <!-- Registration 9 - Bootstrap Brain Component -->
