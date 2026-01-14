@@ -30,7 +30,7 @@ if (!$id || !$token) {
             <div class="col-12 col-md-6 col-xl-7">
                 <div class="d-flex justify-content-center text-bg-primary">
                     <div class="col-12 col-xl-9">
-                        <img class="img-fluid rounded mb-4" loading="lazy" src="./assets/img/bsb-logo-light.svg" width="245" height="80" alt="Logo">
+                        <img class="img-fluid rounded mb-4" loading="lazy" src="/Projekt-Programim-Web/projekt/public/assets/logo/GlamBookLogo.png" width="245" height="80" alt="Logo">
                         <hr class="border-primary-subtle mb-4">
                         <h2 class="h1 mb-4">WELCOME BACK!</h2>
                         <p class="lead mb-5">Set your new password below.</p>
