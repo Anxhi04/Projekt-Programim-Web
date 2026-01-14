@@ -4,7 +4,7 @@ error_reporting(0); //Mos shfaq asnje gabim apo paralajmerim
 
 if($_POST["action"] == "login"  ){
     //First we get data from front in backend
-    $remember = !empty($_POST["remember_token"]); // true/false
+    $remember = !empty($_POST["remember_me"]); // true/false
 
     $email = mysqli_real_escape_string($connection, $_POST["email"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);
@@ -77,12 +77,16 @@ if($_POST["action"] == "login"  ){
                 $_SESSION["email"]=$user['email'];
                 $_SESSION["role"]=$user['role'];
 
-//                $location="/Projekt-Programim-Web/projekt/includes/home.php";
-                $location="/Projekt-Programim-Web/projekt/includes/mainHome.php";
 
-                if($user["role"]=="admin"){
-                    $location="/Projekt-Programim-Web/projekt/admin.php";
+                 if ($_SESSION["role"] === "admin") {
+                    $location = "/admin.php";
+                } else if ($_SESSION["role"] === "manager") {
+                    $location = "/Projekt-Programim-Web/projekt/public/menaxher/calendar.php";
+                } else {
+                    // user i thjeshtë
+                    $location = "/Projekt-Programim-Web/projekt/includes/mainHome.php";
                 }
+
             }
 
         }

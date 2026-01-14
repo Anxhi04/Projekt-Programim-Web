@@ -59,6 +59,24 @@
                                         <button class="btn btn-primary btn-lg" type="submit">Send email</button>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
+                                            <a href="login.php" class="link-secondary text-decoration-none">Login</a>
+                                            <a href="register.php" class="link-secondary text-decoration-none">Register</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="mt-4 mb-4">Or continue with</p>
+                                        <div class="d-flex gap-2 gap-sm-3 justify-content-centerX">
+                                            <a href="#!" class="btn btn-outline-danger bsb-btn-circle bsb-btn-circle-2xl">G</a>
+                                            <a href="#!" class="btn btn-outline-primary bsb-btn-circle bsb-btn-circle-2xl">f</a>
+                                            <a href="#!" class="btn btn-outline-dark bsb-btn-circle bsb-btn-circle-2xl"></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
