@@ -27,7 +27,7 @@ if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
 
         $userRes = mysqli_query(
             $connection,
-            "SELECT id, name, email, role
+            "SELECT id, firstname, email, role
              FROM users
              WHERE id = $userId
              LIMIT 1"
@@ -38,7 +38,7 @@ if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
 
             // krijo session-in
             $_SESSION["id"] = $user["id"];
-            $_SESSION["name"] = $user["name"];
+            $_SESSION["firstname"] = $user["firstname"];
             $_SESSION["email"] = $user["email"];
             $_SESSION["role"] = $user["role"];
 
