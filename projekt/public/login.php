@@ -79,7 +79,7 @@ if($_POST["action"] == "login"  ){
 
 
                  if ($_SESSION["role"] === "admin") {
-                    $location = "/admin.php";
+                    $location = "/Projekt-Programim-Web/projekt/public/admin/adminPage.php";
                 } else if ($_SESSION["role"] === "manager") {
                     $location = "/Projekt-Programim-Web/projekt/public/menaxher/calendar.php";
                 } else {

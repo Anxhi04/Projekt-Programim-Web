@@ -1,0 +1,136 @@
+/* ===============================
+   PRIMARY COLOR SYSTEM
+================================ */
+:root {
+    --bs-primary: rgba(255, 51, 153, 0.85);
+    --bs-primary-rgb: 255, 51, 153;
+
+    --pink-dark: #b0005f;
+    --pink-medium: rgba(255, 51, 153, 0.85);
+    --pink-light: rgb(236 56 162 / 40%);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn-primary,
+.btn-outline-primary:hover {
+    background-color: var(--pink-medium) !important;
+    border-color: var(--pink-medium) !important;
+}
+
+.btn-outline-primary {
+    color: var(--pink-medium) !important;
+    border-color: var(--pink-medium) !important;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+.sidebar-wrapper {
+    background-color: var(--pink-light) !important;
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+    background-color: var(--pink-medium) !important;
+    color: #fff !important;
+}
+
+.sidebar-link i {
+    color: var(--pink-medium);
+}
+
+/* Active item fix */
+.sidebar-item.active > .sidebar-link {
+    background-color: var(--pink-medium) !important;
+    color: #fff !important;
+}
+
+.sidebar-item.active > .sidebar-link i {
+    color: #fff !important;
+}
+
+/* ===============================
+   CARDS
+================================ */
+.card {
+    border-top: 3px solid var(--pink-medium);
+}
+
+/* ===============================
+   STATS ICONS
+================================ */
+.stats-icon.purple,
+.stats-icon.blue,
+.stats-icon.green,
+.stats-icon.red {
+    background-color: var(--pink-medium) !important;
+    color: #fff !important;
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--pink-dark);
+}
+
+/* ===============================
+   TABLES
+================================ */
+.table thead {
+    background-color: var(--pink-light);
+}
+
+/* ===============================
+   LINKS
+================================ */
+a {
+    color: var(--pink-medium);
+}
+
+a:hover {
+    color: var(--pink-dark);
+}
+
+/* ===============================
+   PROFILE NAME / TEXT PRIMARY
+================================ */
+.name h5,
+.text-primary {
+    color: var(--pink-medium) !important;
+}
+
+/* ===============================
+   APEXCHARTS
+================================ */
+.apexcharts-tooltip {
+    background: var(--pink-light) !important;
+    color: var(--pink-dark) !important;
+}
+
+/* Bars */
+.apexcharts-bar-area,
+.apexcharts-bar-series path {
+    fill: var(--pink-medium) !important;
+    stroke: var(--pink-medium) !important;
+}
+
+/* Line / Area charts */
+.apexcharts-line path,
+.apexcharts-area path {
+    stroke: var(--pink-medium) !important;
+}
+
+#location{
+    min-height: 590px;
+}
+/* FORCE LOGO SIZE */
+.sidebar-header .logo img.logo-img {
+    width: 180px !important;   /* provo 160–200 */
+    height: auto !important;
+    max-height: none !important;
+}
+
+
