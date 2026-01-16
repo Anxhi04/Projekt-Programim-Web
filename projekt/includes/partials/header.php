@@ -17,7 +17,7 @@ if (isset($_POST['book-service'])) {
 </script>
 
     <!DOCTYPE html>
-<html>
+<html lang="en">
      <head>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
          <meta charset="utf-8">
@@ -35,8 +35,8 @@ if (isset($_POST['book-service'])) {
              }
 
              .nav-pills .nav-link.active {
-                 background-color: pink;
-                 color: white;
+                 background-color: pink !important;
+                 color: white !important;
              }
              .nav-pills .nav-item:not(:first-child) .nav-link {
                  color: pink;
@@ -46,7 +46,7 @@ if (isset($_POST['book-service'])) {
                  margin: 2px;
              }
              .nav-pills button:hover{
-                 background: rgba(236, 206, 211, 0.71);
+                 background: rgba(236, 206, 211, 0.71) !important;
              }
              .nav-pills .nav-link.active.login:hover,
              .nav-pills .nav-item .nav-link:hover{
@@ -79,7 +79,7 @@ if (isset($_POST['book-service'])) {
                          Logout
                      </a>
                  <?php else: ?>
-                     <a href="Projekt-Programim-Web/projekt/public/login.html" class="nav-link active login">
+                     <a href="Projekt-Programim-Web/projekt/public/login.php" class="nav-link active login">
                          Login
                      </a>
                  <?php endif; ?>
