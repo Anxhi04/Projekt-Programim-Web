@@ -6,7 +6,7 @@
     --bs-primary-rgb: 255, 51, 153;
 
     --pink-dark: #b0005f;
-    --pink-medium: rgba(255, 51, 153, 0.85);
+    --pink-medium: rgba(255, 51, 153, 0.68);
     --pink-light: rgb(236 56 162 / 40%);
 }
 
@@ -28,7 +28,7 @@
    SIDEBAR
 ================================ */
 .sidebar-wrapper {
-    background-color: var(--pink-light) !important;
+    background-color: white !important;
 }
 
 .sidebar-link.active,
@@ -133,4 +133,43 @@ a:hover {
     max-height: none !important;
 }
 
+/* Action icons */
+.action-icons i {
+    cursor: pointer;
+    color: #9ca3af; /* gri e butë */
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
 
+.action-icons i:hover {
+    color: #374151;
+    transform: scale(1.1);
+}
+
+/* Status badges (pastel) */
+.status-active {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-disabled {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pink{
+    background-color:rgba(255, 51, 153, 0.85);
+    color: white;
+}
+.pink:hover{
+    background-color:  rgba(255, 51, 153, 0.68) ;
+    color: white;
+}
