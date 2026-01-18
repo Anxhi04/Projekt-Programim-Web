@@ -3,10 +3,6 @@ require_once __DIR__ . "/guard.php";
 require_once __DIR__ . "/partials/header.php";
 require_once __DIR__ . '/../../db.php';
 
-require_once __DIR__ . "/guard.php";
-require_once __DIR__ . "/partials/header.php";
-require_once __DIR__ . '/../../db.php';
-
 $user_id = $_SESSION['id'] ?? null;
 
 $query = "SELECT firstname, lastname, email, profile_photo FROM users WHERE id = ?";
@@ -44,8 +40,6 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-    <!-- Bootstrap -->
 
     <style>
         body {
@@ -117,7 +111,7 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 <div class="container py-5">
     <div class="row justify-content-center">
-        <!-- Profile Display Card -->
+        <!--Profile Display Card-->
         <div class="col-md-9 mb-5">
             <div class="profile-card profile-display text-center">
                 <img src="<?= $user['profile_photo'] ?: 'assets/default-user.png' ?>" class="profile-img" >
@@ -126,7 +120,7 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
 
-        <!-- Edit Form Card -->
+        <!-- Edit Form Card-->
         <div class="col-md-9">
             <div class="profile-card profile-edit">
 
@@ -146,7 +140,7 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
                     <div class="mb-3">
                         <label class="form-label">Last Name</label>
-                        <input type="text" class="form-control" name="lastname" id="lastname" value="<?= htmlspecialchars($user['lastname']) ?>"disabled>
+                        <input type="text" class="form-control" name="lastname" id="lastname" value="<?= htmlspecialchars($user['lastname']) ?>" disabled>
                     </div>
 
                     <div class="mb-3">
@@ -185,11 +179,10 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
                             <?php foreach ($appointments as $a): ?>
                                 <?php
-                                // Build datetime
+
                                 $appointmentDateTime = strtotime(date('Y-m-d',strtotime($a['date'])). ' ' . $a['start_time']);
                                 $now = time();
 
-                                // Determine status
                                 $status = ($appointmentDateTime < $now) ? "Completed" : "Upcoming";
                                 ?>
                                 <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
@@ -246,7 +239,7 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
     form.addEventListener("submit", function(e) {
 
-        // Validimi i emrit - vetëm shkronja
+        // Validimi i emrit
         const nameRegex = /^[a-zA-Z]+$/;
         if (!nameRegex.test(firstname.value.trim())) {
             e.preventDefault();
@@ -254,14 +247,14 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             return;
         }
 
-        // Validimi i mbiemrit - vetëm shkronja
+        // Validimi i mbiemrit
         if (!nameRegex.test(lastname.value.trim())) {
             e.preventDefault();
             Swal.fire("Invalid Last Name", "Last name should contain only letters.", "error");
             return;
         }
 
-        // Validimi i email-it
+        // Validimi i emailit
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email.value.trim())) {
             e.preventDefault();
@@ -283,7 +276,7 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             if (file.size > 2 * 1024 * 1024) {
                 e.preventDefault();
                 Swal.fire("File Too Large", "Image must be smaller than 2MB.", "error");
-                return;
+
             }
         }
     });

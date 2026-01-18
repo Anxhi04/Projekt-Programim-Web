@@ -1,5 +1,4 @@
 <?php
-// reset_password.php
 $id = $_GET['id'] ?? null;
 $token = $_GET['token'] ?? null;
 
@@ -129,6 +128,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById("password").value;
         const confirm_password = document.getElementById("confirm_password").value;
 
+        // Validimi i paswordit
+        if (!password || !confirm_password) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Missing fields',
+                text: 'Please fill out both password fields.',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
         if (password !== confirm_password) {
             Swal.fire({
                 icon: 'warning',

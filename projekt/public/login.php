@@ -77,14 +77,13 @@ if($_POST["action"] == "login"  ){
                 $_SESSION["email"]=$user['email'];
                 $_SESSION["role"]=$user['role'];
 
-
+                // Logini sipas roleve
                  if ($_SESSION["role"] === "admin") {
                     $location = "/Projekt-Programim-Web/projekt/public/admin/adminPage.php";
                 } else if ($_SESSION["role"] === "manager") {
                     $location = "/Projekt-Programim-Web/projekt/public/menaxher/calendar.php";
                 } else {
-                    // user i thjeshtë
-                    $location = "/Projekt-Programim-Web/projekt/includes/mainHome.php";
+                    $location = "/Projekt-Programim-Web/projekt/includes/profile.php";
                 }
 
             }

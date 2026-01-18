@@ -14,7 +14,6 @@ setInterval(() => {
     }
 }, 1000);
 
-// Reset idleTime
 ['mousemove', 'keydown', 'click', 'scroll'].forEach(event => {
     document.addEventListener(event, () => idleTime = 0);
 });

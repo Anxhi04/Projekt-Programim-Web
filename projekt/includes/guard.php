@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . "/../../db.php";
 
-// -------------------- Remember Me HANDLER --------------------
+// Remember me handler
 if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
 
     $token = $_COOKIE["remember_token"];
@@ -43,27 +43,25 @@ if (!isset($_SESSION["id"]) && !empty($_COOKIE["remember_token"])) {
             $_SESSION["role"] = $user["role"];
 
         } else {
-            // fshi cookie sepse user s’ekziston me
             setcookie("remember_token", "", time() - 3600, "/");
         }
     } else {
-        // fshi cookie sepse tokeni nuk vlen
         setcookie("remember_token", "", time() - 3600, "/");
     }
 }
 
-// -------------------- SESSION CHECK --------------------
+// Sesssion check
 if (!isset($_SESSION["id"])) {
     header("Location: /Projekt-Programim-Web/projekt/public/login.php");
     exit;
 }
 
-// -------------------- SESSION TIMEOUT --------------------
+// Sesssion timeout
 $timeout = 15*60; // 15 minuta
 
 if (isset($_SESSION["LAST_ACTIVITY"]) && (time() - $_SESSION["LAST_ACTIVITY"]) > $timeout) {
 
-    // nese ka remember_me mos e shkatërro session
+    // nese ka remember_me mos e shkaterro session
     if (empty($_COOKIE["remember_token"])) {
         session_unset();
         session_destroy();

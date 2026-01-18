@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/bootstrap.min.css">
-    <!--    <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/partials/header.php">-->
     <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/custom.css">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -14,7 +13,6 @@
 
 </head>
 <body>
-<!-- Password Reset 9 - Bootstrap Brain Component -->
 <section class="bg-primary py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row gy-4 align-items-center">
@@ -89,7 +87,26 @@
     document.getElementById("forgotForm").addEventListener("submit", async function(e){
         e.preventDefault();
 
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email").value.trim();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validimi i emailit
+        if (email === "") {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Email missing',
+                text: 'Please enter your email.'
+            });
+        }
+
+        if (!emailRegex.test(email)) {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Invalid email format',
+                text: 'Please enter a valid email address.'
+            });
+        }
 
         try {
             const res = await fetch("/Projekt-Programim-Web/projekt/public/send_reset.php", {
@@ -98,7 +115,7 @@
                 body: JSON.stringify({ email })
             });
 
-            const text = await res.text(); // e lexojmë si text që të mos çahet
+            const text = await res.text();
             let data;
             try { data = JSON.parse(text); } catch { data = { error: text }; }
 

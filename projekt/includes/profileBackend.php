@@ -2,9 +2,6 @@
 require_once __DIR__ . "/guard.php";
 require_once __DIR__ . '/../../db.php';
 
-// ==========================
-// BACKEND UPDATE
-// ==========================
 $user_id = $_SESSION['id'] ?? null;
 
 if (!$user_id) {
@@ -17,10 +14,7 @@ if (isset($_POST['save'])) {
     $new_lastname  = trim($_POST['lastname'] ?? '');
     $new_email     = trim ($_POST['email'] ?? '');
 
-    //======================
-    // VALIDIMI I TE DHENAVE
-    // ======================
-
+    // Validimi i te dhenave
     if (empty($new_firstname) || empty($new_lastname) || empty($new_email)) {
         $_SESSION['profile_msg'] = [
             'type' => 'error',
@@ -29,6 +23,7 @@ if (isset($_POST['save'])) {
         header("Location: profile.php");
         exit;
     }
+    // Validimi i emrit
     if (!preg_match("/^[a-zA-Z]+$/", $new_firstname)) {
         $_SESSION['profile_msg'] = [
             'type' => 'error',
@@ -37,7 +32,7 @@ if (isset($_POST['save'])) {
         header("Location: profile.php");
         exit;
     }
-
+    // Validimi i mbiemrit
     if (!preg_match("/^[a-zA-Z]+$/", $new_lastname)) {
         $_SESSION['profile_msg'] = [
             'type' => 'error',
@@ -46,8 +41,7 @@ if (isset($_POST['save'])) {
         header("Location: profile.php");
         exit;
     }
-
-
+    //Validimi i emailit
     if (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['profile_msg'] = [
             'type' => 'error',
@@ -56,7 +50,7 @@ if (isset($_POST['save'])) {
         header("Location: profile.php");
         exit;
     }
-    // Kontrollo nëse email-i është i zënë nga dikush tjetër
+
     $email_check = $connection->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
     $email_check->bind_param("si", $new_email, $user_id);
     $email_check->execute();
@@ -71,7 +65,7 @@ if (isset($_POST['save'])) {
         exit;
     }
 
-    // Lexojmë vlerat e vjetra nga databaza
+    // Lexojme vlerat e vjetra nga databaza
     $query = "SELECT firstname, lastname, email ,profile_photo  FROM users WHERE id = ?";
     $stmt = $connection->prepare($query);
     $stmt->bind_param("i", $user_id);
@@ -87,10 +81,8 @@ if (isset($_POST['save'])) {
     if (empty($new_lastname))  $new_lastname  = $old_lastname;
     if (empty($new_email))     $new_email     = $old_email;
 
-    // ======================
-    // NGARKIMI I FOTOS
-    // ======================
-    $photo_path = $old_photo; // default nëse s'ngarkohet foto
+    // Ngarkimi i fotos
+    $photo_path = $old_photo;
 
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == 0) {
 
@@ -140,9 +132,7 @@ if (isset($_POST['save'])) {
         }
     }
 
-    // ======================
-    // UPDATE DB
-    // ======================
+    // Update DB
     $update_query = "UPDATE users SET firstname = ?, lastname = ?, email = ?, profile_photo = ? WHERE id = ?";
     $update_stmt = $connection->prepare($update_query);
     $update_stmt->bind_param("ssssi", $new_firstname, $new_lastname, $new_email, $photo_path, $user_id);
