@@ -308,6 +308,28 @@ include('partials/header.php');
              });
 
          </script>
+         <!-- SCRIPT PËR UPDATE STATUS -->
+         <script>
+             function updateReservations() {
+                 fetch("update_reservation_status.php")
+                     .then(response => response.json())
+                     .then(data => {
+                         data.forEach(reservation => {
+                             const row = document.getElementById("res-" + reservation.id);
+                             if (row) {
+                                 row.querySelector(".status").innerText = reservation.status;
+                             }
+                         });
+                     });
+             }
+
+             // ekzekuto menjëherë
+             updateReservations();
+
+             // përsërit çdo 60 sekonda
+             setInterval(updateReservations, 60000);
+         </script>
+
          </body>
     </html>
 

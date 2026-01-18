@@ -77,10 +77,6 @@ if (isset($_POST['save'])) {
     $old_email     = $row['email'];
     $old_photo     = $row['profile_photo'];
 
-    if (empty($new_firstname)) $new_firstname = $old_firstname;
-    if (empty($new_lastname))  $new_lastname  = $old_lastname;
-    if (empty($new_email))     $new_email     = $old_email;
-
     // Ngarkimi i fotos
     $photo_path = $old_photo;
 

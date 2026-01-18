@@ -14,8 +14,10 @@ $user = $result->fetch_assoc();
 
 $query = "
 SELECT 
+    r.id,
     r.date,
     r.start_time,
+    r.status AS status,
     s.name AS service_name,
     b.name AS business_name
 FROM reservations r
@@ -103,6 +105,29 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             padding: 25px;
             border: 2px solid #f6daea;
         }
+        .badge-confirmed {
+            background-color: #a6ecd6;
+            color: white;
+        }
+
+        .badge-pending {
+            background-color: #f8f5a8;
+            color: white;
+        }
+
+        .badge-canceled {
+            background-color: #7980f4;
+            color: white;
+        }
+        .badge-completed {
+            background-color: #78a9f3;
+            color: white;
+        }
+        .btn-Cancel{
+            background-color: #ed4582;
+            color: white;
+        }
+
 
     </style>
 </head>
@@ -180,10 +205,8 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                             <?php foreach ($appointments as $a): ?>
                                 <?php
 
-                                $appointmentDateTime = strtotime(date('Y-m-d',strtotime($a['date'])). ' ' . $a['start_time']);
-                                $now = time();
+                                $status = htmlspecialchars($a['status']);
 
-                                $status = ($appointmentDateTime < $now) ? "Completed" : "Upcoming";
                                 ?>
                                 <div class="d-flex justify-content-between border-bottom pb-3 mb-3">
                                     <div>
@@ -197,8 +220,23 @@ $appointments = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                                             <span>🏥 <?= htmlspecialchars($a['business_name']) ?></span>
                                         </div>
                                     </div>
-                                    <div class="text-end fw-semibold <?= $status === 'Completed' ? 'text-muted' : '' ?>">
-                                        <?= $status ?>
+                                    <div class="text-end">
+                                        <?php if ($status === 'confirmed'): ?>
+                                            <span class="badge badge-confirmed">Confirmed</span>
+                                        <?php elseif ($status === 'pending'): ?>
+                                            <span class="badge badge-pending ">Pending</span>
+                                        <?php elseif ($status === 'canceled'): ?>
+                                            <span class="badge badge-canceled">Canceled</span>
+                                        <?php elseif ($status === 'completed'): ?>
+                                            <span class="badge badge-completed">Completed</span>
+                                        <?php endif; ?>
+
+                                        <?php if ($status === 'confirmed' || $status === 'pending'): ?>
+                                            <form action="cancel_appointment.php" method="POST">
+                                                <input type="hidden" name="reservation_id" value="<?= $a['id'] ?>">
+                                                <button class="btn btn-sm btn-Cancel mt-2">Cancel</button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
