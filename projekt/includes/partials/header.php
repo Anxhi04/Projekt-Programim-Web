@@ -20,6 +20,7 @@ if (isset($_POST['book-service'])) {
 <html lang="en">
      <head>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
          <meta charset="utf-8">
          <meta content="width=device-width, initial-scale=1.0" name="viewport">
          <style>
@@ -35,11 +36,11 @@ if (isset($_POST['book-service'])) {
              }
 
              .nav-pills .nav-link.active {
-                 background-color: pink !important;
+                 background-color: rgba(255, 51, 153, 0.68) !important;
                  color: white !important;
              }
              .nav-pills .nav-item:not(:first-child) .nav-link {
-                 color: pink;
+                 color: #dfb7c0;
              }
              .nav-pills button{
                  gap: 1%;
@@ -67,13 +68,14 @@ if (isset($_POST['book-service'])) {
              <li class="nav-item" role="presentation">
                  <button class="nav-link" id="homebtn2" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Home🏚️</button>
              </li>
-             <li class="nav-item" role="presentation">
-                 <button class="nav-link" id="profile" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-             </li>
+
 <!--             <li class="nav-item" role="presentation">-->
 <!--                 <button class="nav-link"  name="book-service" id="book-service" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Book Service📆</button>-->
 <!--             </li>-->
-             <li class="nav-item ms-auto">
+             <li class="nav-item ms-auto d-flex align-items-center gap-2"">
+             <a href="#" id="profile" class="nav-link">
+                 <i class="bi bi-person-circle fs-4"></i>
+             </a>
                  <?php if (isset($_SESSION["id"])): ?>
                      <a href="#" id="logoutLink" class="nav-link active login">
                          Logout

@@ -15,7 +15,7 @@
 h6{
     text-align: center;
     font-size: larger;
-    color: #c539c5;
+    color: #7a0744;
 }
 
 .text{
@@ -37,13 +37,13 @@ p{
     box-shadow: 0px 0px 7px 0px rgba(220, 135, 149, 0.63);
 }
 .card .card-header{
-    background-color: rgba(255, 192, 203, 0.82);
+    background-color: rgb(236 56 162 / 40%);
 }
 .card .card-header{
-    color: #c539c5;
+    color: #7a0744;
 }
 .card .card-body{
-    color: #c539c5;
+    color: #7a0744;
 }
 .book-info{
     display: none;
