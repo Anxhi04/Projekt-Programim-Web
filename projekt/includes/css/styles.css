@@ -111,11 +111,17 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
+    outline: none;
     transition: opacity 0.3s ease;
 }
 
 .cta-button:hover {
     opacity: 0.9;
+}
+
+.cta-button:focus {
+    outline: none;           /* heq outline kur fokusohet */
 }
 
 /* Carousel Indicators */

@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . "/../../includes/guard.php";
+$currentPage = 'users';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +72,7 @@
 </div>
 
 <script src="dist/assets/compiled/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Modal -->
 <div class="modal fade" id="userModal" tabindex="-1">
@@ -84,16 +90,19 @@
                 <div class="mb-3">
                     <label>Firstname</label>
                     <input type="text" id="firstname" class="form-control">
+                    <small id="firstname_message" class="text-danger"></small>
                 </div>
 
                 <div class="mb-3">
                     <label>Lastname</label>
                     <input type="text" id="lastname" class="form-control">
+                    <small id="lastname_message" class="text-danger"></small>
                 </div>
 
                 <div class="mb-3">
                     <label>Email</label>
                     <input type="email" id="email" class="form-control">
+                    <small id="email_message" class="text-danger"></small>
                 </div>
 
                 <div class="mb-3">
@@ -120,6 +129,8 @@
                         <option value="Disabled">Disabled</option>
                     </select>
                 </div>
+
+
             </div>
 
             <div class="modal-footer">
@@ -182,8 +193,9 @@
     }
 
     function viewProfile(id) {
-        window.location.href = "/Projekt-Programim-web/projekt/includes/profile.php?id=" + id;
+        window.location.href = "userProfileView.php?id=" + id;
     }
+
 
 
     function editUser(id) {
@@ -207,12 +219,58 @@
     }
 
     function saveUser() {
+
+        var error = 0;
+
+        var firstnameVal = firstname.value.trim();
+        var lastnameVal  = lastname.value.trim();
+        var emailVal     = email.value.trim();
+
+        var alpha_regex = /^[a-zA-Z]{3,40}$/;
+        var email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // ===================== FRONTEND VALIDATION =====================
+
+        if (!alpha_regex.test(firstnameVal)) {
+            firstname.classList.add("border-danger");
+            document.getElementById("firstname_message").innerText =
+                "Firstname must be alphabetic and at least 3 letters.";
+            error++;
+        } else {
+            firstname.classList.remove("border-danger");
+            document.getElementById("firstname_message").innerText = "";
+        }
+
+        if (!alpha_regex.test(lastnameVal)) {
+            lastname.classList.add("border-danger");
+            document.getElementById("lastname_message").innerText =
+                "Lastname must be alphabetic and at least 3 letters.";
+            error++;
+        } else {
+            lastname.classList.remove("border-danger");
+            document.getElementById("lastname_message").innerText = "";
+        }
+
+        if (!email_regex.test(emailVal)) {
+            email.classList.add("border-danger");
+            document.getElementById("email_message").innerText =
+                "E-mail format is not allowed.";
+            error++;
+        } else {
+            email.classList.remove("border-danger");
+            document.getElementById("email_message").innerText = "";
+        }
+
+        if (error > 0) return;
+
+        // ===================== AJAX SAVE (EKZISTUESE) =====================
+
         const data = new URLSearchParams({
             action: userId.value ? "update_user" : "add_user",
             id: userId.value,
-            firstname: firstname.value,
-            lastname: lastname.value,
-            email: email.value,
+            firstname: firstnameVal,
+            lastname: lastnameVal,
+            email: emailVal,
             role: role.value,
             verified: verified.value === "Yes" ? 1 : 0,
             status: status.value === "Active" ? 1 : 0
@@ -227,13 +285,67 @@
     }
 
     function deleteUser(id) {
-        if (!confirm("Delete this user?")) return;
 
-        fetch("usersAjax.php", {
-            method: "POST",
-            body: new URLSearchParams({ action: "delete_user", id })
-        }).then(() => renderUsers());
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This user will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#e74c3c",
+            cancelButtonColor: "#6c757d",
+            confirmButtonText: "Yes, delete",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                fetch("usersAjax.php", {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        action: "delete_user",
+                        id: id
+                    })
+                })
+                    .then(res => res.json())
+                    .then(response => {
+
+                        if (response.status === "success") {
+
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: response.message,
+                                icon: "success",
+                                confirmButtonColor: "#e91e63"
+                            });
+
+                            // ✅ Rifresko tabelën
+                            renderUsers();
+
+                        } else {
+
+                            Swal.fire({
+                                title: "Error",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonColor: "#e74c3c"
+                            });
+
+                        }
+
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Unexpected error occurred",
+                            icon: "error",
+                            confirmButtonColor: "#e74c3c"
+                        });
+                    });
+            }
+        });
     }
+
+
 
     function toggleStatus(id) {
         fetch("usersAjax.php", {
@@ -243,11 +355,6 @@
     }
 
     renderUsers();
-
-
-// TODO validimi i frontit
-//     todo rregullimi me sweet alert i delete
-//   todo  rishikimi i kodit
 
 
 </script>

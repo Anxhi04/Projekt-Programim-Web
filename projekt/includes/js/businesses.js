@@ -32,8 +32,8 @@ const businesses = [
     },
     {
         id: 6,
-        name: "The Modern Barbershop",
-        serviceType: "Barbershop",
+        name: "The Modern HairStyle",
+        serviceType: "Hair Salon",
         imageUrl: "https://images.unsplash.com/photo-1759134198561-e2041049419c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJiZXJzaG9wJTIwbW9kZXJufGVufDF8fHx8MTc2ODI0Mzk2OXww&ixlib=rb-4.1.0&q=80&w=1080"
     }
 ];
@@ -105,14 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Open booking page (you can customize this function later)
 function openBookingPage(business) {
-    // Vetëm për biznesin e parë (id = 1)
     if (business.id === 1) {
-        // Redirekt direkt në faqen e rezervimit
-        // Për çdo biznes tjetër mund të ndryshosh linkun më vonë
+
         const bookingUrl = "/Projekt-Programim-Web/projekt/includes/book-service.php?businessId=" + business.id;
         window.location.href = bookingUrl;
     } else {
-        // Për të tjerët, shfaq mesazh profesional
+
         alert(
             `Booking for "${business.name}" is not available yet.\n` +
             `We are working on adding this service soon!`

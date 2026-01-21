@@ -5,4 +5,5 @@ config/mailer.php
 /projekt/app
 /projekt/public/create_user.php
 .idea/
+/vendor/
 

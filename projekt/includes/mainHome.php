@@ -41,7 +41,7 @@ require_once __DIR__ . "/partials/header.php";
     <div class="hero-content">
         <h1 class="hero-title">Glam<span class="pink-text">Book</span></h1>
         <p class="hero-subtitle">Your beauty appointments, simplified. Book your next salon, spa, or wellness session in seconds.</p>
-        <button class="cta-button">
+        <a href="/Projekt-Programim-Web/projekt/public/login.php" class="cta-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -49,7 +49,8 @@ require_once __DIR__ . "/partials/header.php";
                 <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
             <span>Book Now</span>
-        </button>
+        </a>
+
     </div>
 
     <!-- Carousel Indicators -->
@@ -149,7 +150,9 @@ require_once __DIR__ . "/partials/header.php";
         <div class="cta-section">
             <h3 class="cta-title">Ready to Transform Your Beauty Routine?</h3>
             <p class="cta-text">Join thousands of satisfied clients who have discovered the easiest way to book beauty services.</p>
-            <button class="cta-button-white">Get Started Free</button>
+            <a href="/Projekt-Programim-Web/projekt/public/login.php" >
+                <button class="cta-button-white">Get Started Free</button>
+            </a>
         </div>
     </div>
 </section>

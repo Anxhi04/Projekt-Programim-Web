@@ -52,16 +52,25 @@ if ($user_id && $email_token) {
         body {
             background: #f6f6f6;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .verify-container {
-            max-width: 420px;
-            margin: 120px auto;
+            max-width: 460px;
+            margin: 110px auto;
             background: #fff;
-            border-radius: 14px;
-            padding: 35px;
+            border-radius: 18px;
+            padding: 38px 36px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+            box-shadow: 0 18px 55px rgba(0,0,0,.12);
+            border: 1px solid rgba(255, 51, 153, .18);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {opacity: 0; transform: translateY(-20px);}
+            100% {opacity: 1; transform: translateY(0);}
         }
 
         .verify-container.success h1 {
@@ -73,29 +82,54 @@ if ($user_id && $email_token) {
         }
 
         .icon {
-            font-size: 56px;
+            font-size: 64px;
             margin-bottom: 15px;
+            width: 96px;
+            height: 96px;
+            line-height: 96px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,.06);
+        }
+
+        .icon.success {
+            color: #2ecc71;
+        }
+
+        .icon.error {
+            color: #e74c3c;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 12px 0;
         }
 
         p {
             font-size: 15px;
             color: #555;
             margin-top: 10px;
+            line-height: 1.5;
         }
 
         .btn {
             display: inline-block;
             margin-top: 25px;
-            padding: 12px 28px;
-            border-radius: 8px;
-            background: rgba(255,51,153,.9);
+            padding: 12px 30px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255,51,153,.95), rgba(255,102,180,.85));
             color: #fff;
             text-decoration: none;
             font-weight: 600;
+            transition: transform .2s ease, box-shadow .2s ease;
+            box-shadow: 0 12px 24px rgba(255, 51, 153, .22);
         }
 
         .btn:hover {
-            background: rgba(255,51,153,.7);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px rgba(255, 51, 153, .25);
         }
     </style>
 </head>
@@ -103,8 +137,8 @@ if ($user_id && $email_token) {
 <body>
 
 <div class="verify-container <?= $status ?>">
-    <div class="icon">
-        <?= $status === 'success' ? '✅' : '❌' ?>
+    <div class="icon <?= $status ?>">
+        <?= $status === 'success' ? '✔' : '✖' ?>
     </div>
 
     <h1><?= $status === 'success' ? 'Email Verified' : 'Verification Failed' ?></h1>
@@ -115,5 +149,3 @@ if ($user_id && $email_token) {
 
 </body>
 </html>
-
-

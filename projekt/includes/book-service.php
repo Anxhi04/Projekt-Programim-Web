@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . "/guard.php";
 include('partials/header.php');
+
+require_once __DIR__ . '/stripe_inicialization.php';
+
 ?>
 <DOCTYPE html>
     <html>
@@ -328,7 +331,9 @@ include('partials/header.php');
 
              // përsërit çdo 60 sekonda
              setInterval(updateReservations, 60000);
+
          </script>
+
 
          </body>
     </html>

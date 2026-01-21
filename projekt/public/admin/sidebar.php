@@ -47,12 +47,12 @@
                 </li>
 
                 <!-- SERVICE CATEGORIES -->
-                <li class="sidebar-item <?= ($currentPage === 'categories') ? 'active' : '' ?>">
-                    <a href="service-categories.php" class="sidebar-link">
-                        <i class="bi bi-tags-fill"></i>
-                        <span>Service Categories</span>
-                    </a>
-                </li>
+<!--                <li class="sidebar-item --><?php //= ($currentPage === 'categories') ? 'active' : '' ?><!--">-->
+<!--                    <a href="service-categories.php" class="sidebar-link">-->
+<!--                        <i class="bi bi-tags-fill"></i>-->
+<!--                        <span>Service Categories</span>-->
+<!--                    </a>-->
+<!--                </li>-->
 
                 <!-- BOOKINGS -->
 <!--                <li class="sidebar-item --><?php //= ($currentPage === 'bookings') ? 'active' : '' ?><!--">-->

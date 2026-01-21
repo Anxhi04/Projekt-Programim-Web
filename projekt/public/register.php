@@ -144,7 +144,7 @@
                             <div class="col-12">
                                 <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
                                     <p class="m-0 text-secondary text-center">Already have an account? <a
-                                                href="login.html" class="link-primary text-decoration-none ">Sign
+                                                href="login.php" class="link-primary text-decoration-none ">Sign
                                             in</a></p>
                                 </div>
                             </div>
@@ -276,14 +276,59 @@
         }
 // TODO beje me regex validimin
         // Validimi i pass
+        // if (password.trim() === "") {
+        //     $("#password").addClass("border-danger");
+        //     $("#password_message").text("Password can not be empty");
+        //     error++;
+        // } else {
+        //     $("#password").removeClass("border-danger")
+        //     $("#password_message").text("");
+        // }
+
+        //i sakti
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
         if (password.trim() === "") {
             $("#password").addClass("border-danger");
             $("#password_message").text("Password can not be empty");
             error++;
-        } else {
-            $("#password").removeClass("border-danger")
+        }
+        else if (password.length < 8) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password must be at least 8 characters");
+            error++;
+        }
+        else if (!/[A-Z]/.test(password)) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password must contain at least one uppercase letter");
+            error++;
+        }
+        else if (!/[a-z]/.test(password)) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password must contain at least one lowercase letter");
+            error++;
+        }
+        else if (!/\d/.test(password)) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password must contain at least one number");
+            error++;
+        }
+        else if (!/[@$!%*?&]/.test(password)) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password must contain at least one special character");
+            error++;
+        }
+        else if (!passwordRegex.test(password)) {
+            $("#password").addClass("border-danger");
+            $("#password_message").text("Password is not valid");
+            error++;
+        }
+        else {
+            $("#password").removeClass("border-danger");
             $("#password_message").text("");
         }
+
 
 
         if (confirmPassword != password) {
