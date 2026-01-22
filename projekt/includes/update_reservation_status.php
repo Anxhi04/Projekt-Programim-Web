@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../db.php';
 
-// përditëso statuset e rezervimeve që kanë kaluar
+// update statuset e rezervimeve qe kane kaluar
 $update = $connection->prepare("
     UPDATE reservations 
     SET status = 'completed'
@@ -10,7 +10,7 @@ $update = $connection->prepare("
 ");
 $update->execute();
 
-// 2. Merr për front-end vetëm rezervimet që janë 'completed' ose 'pending'
+// Merr per frontend vetem rezervimet qe jane completed ose pending
 $result = mysqli_query($connection, "
     SELECT id, client_user_id, service_id, date, status 
     FROM reservations
