@@ -56,7 +56,7 @@ $text = "
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Verify your email address';
+        $mail->Subject = 'Verification Email from GlamBook';
         $mail->Body = $text;
 //    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
