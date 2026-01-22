@@ -264,19 +264,12 @@
 
     document.addEventListener("DOMContentLoaded", function() {
 
-        // Merr të dhënat me fetch
+        // Marrim te dhenat e eventeve nga db
         fetch('/projekt/public/menaxher/api/calendar_events.php')
             .then(response => response.json())
             .then(eventsdata => {
 
                 console.log("Events data:", eventsdata);
-
-                // Initialize iCheck
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green'
-                });
-
                 // Initialize external events
                 $('#external-events div.external-event').each(function() {
                     $(this).data('event', {
@@ -361,11 +354,7 @@
                         }, 200);
 
                     },
-                    drop: function() {
-                        if ($('#drop-remove').is(':checked')) {
-                            $(this).remove();
-                        }
-                    }
+
                 });
             })
             .catch(error => console.error("Error:", error));

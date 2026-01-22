@@ -35,7 +35,7 @@ if($_POST["action"] == "login"  ){
         if(!$result){
             http_response_code(500);
             $statuscode=500;
-            $message="There isb an error in db";
+            $message="There is an error in db";
         }
         //If there isnt any user with that email
         else if(mysqli_num_rows($result) == 0){
