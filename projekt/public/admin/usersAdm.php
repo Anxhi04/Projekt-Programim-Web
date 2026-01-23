@@ -108,10 +108,11 @@ $currentPage = 'users';
                 <div class="mb-3">
                     <label>Role</label>
                     <select id="role" class="form-select">
-                        <option>admin</option>
-                        <option>manager</option>
-                        <option>user</option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Manager</option>
+                        <option value="user">User</option>
                     </select>
+
                 </div>
 
                 <div class="mb-3">
@@ -186,7 +187,7 @@ $currentPage = 'users';
         document.getElementById('firstname').value = '';
         document.getElementById('lastname').value = '';
         document.getElementById('email').value = '';
-        document.getElementById('role').value = 'Admin';
+        document.getElementById('role').value = 'admin';
         document.getElementById('verified').value = 'No';
         document.getElementById('status').value = 'Active';
         modal.show();

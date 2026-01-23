@@ -28,7 +28,7 @@ function response($status, $message = null, $data = null) {
 function validate_user($firstname, $lastname, $email, $role, $verified, $status) {
     $alpha_regex = "/^[a-zA-Z]{3,40}$/";
     $email_regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    $allowed_roles = ['Admin', 'Manager', 'User'];
+    $allowed_roles = ['admin', 'manager', 'user'];
 
     if (!preg_match($alpha_regex, $firstname)) {
         response("error", "Firstname must be alphabetic and 3–40 letters.");
