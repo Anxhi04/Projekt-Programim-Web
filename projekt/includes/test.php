@@ -154,8 +154,7 @@ $reservationFee = round($price * 0.05, 2); // 5%
             return;
         }
 
-        // --------------------------
-        // 🔹 Confirm payment
+        // Confirm payment
         const confirm = await stripe.confirmCardPayment(result.client_secret);
         if(confirm.error){
             document.getElementById('error').innerText = confirm.error.message;

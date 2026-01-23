@@ -6,14 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/Projekt-Programim-web/projekt/includes/css/bootstrap.min.css">
-    <!--    <link rel="stylesheet" href="/projekt/includes/partials/header.php">-->
     <link rel="stylesheet" href="/Projekt-Programim-Web/projekt/includes/css/custom.css">
-    <title>WELCOME</title>
+    <title>Register</title>
 
 </head>
 <body>
 <!-- Registration 9 - Bootstrap Brain Component -->
-<!--pjesa vizuale-->
 <section class="bg-primary py-3 py-md-5 py-xl-8">
     <div class="container">
         <div class="row gy-4 align-items-center">
@@ -50,8 +48,7 @@
                         </div>
                         <div>
                         </div>
-                        <!--                            action="login.php"-->
-                        <!--                        onsubmit="return checkPass()"-->
+
                         <form class="m-t" role="form" method="post"  id="registerForm">
                             <input type="hidden" id="id" name="id" value="2">
                             <input type="hidden" id="username" name="username" value="test1234">
@@ -135,7 +132,6 @@
                                         <button class="btn btn-primary btn-lg" id="register" name="test" type="submit"
                                         ">Sign up
                                         </button>
-                                        <!--                                        onclick="register()-->
                                     </div>
                                 </div>
                             </div>
@@ -213,23 +209,6 @@
 </script>
 
 <script>
-
-    toastr.options = {
-        "closeButton": true,
-        "debug": true,
-        "progressBar": true,
-        "preventDuplicates": true,
-        "positionClass": "toast-top-right",
-        "onclick": null,
-        "showDuration": "400",
-        "hideDuration": "1000",
-        "timeOut": "7000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
 
     //validimi i frontend
     function register() {
@@ -348,16 +327,15 @@
 
 </script>
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function () {
 
         $("#registerForm").submit(function (e) {
-            e.preventDefault(); // ndalon reload
+            e.preventDefault();
 
-            if (!register()) return; // kontroll validimi frontend
+            if (!register()) return; // perdor validimin nga me lart
 
             $.ajax({
                 url: "registerBackend.php",

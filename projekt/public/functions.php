@@ -37,7 +37,7 @@ function sendEmail($data){
         //Recipients
         $mail->setFrom('verifyGlamBook@gmail.com', 'No reply');
 //        $mail->addAddress('emadanipolli@gmail.com', 'Emada');     //Add a recipient
-    $mail->addAddress($data["user_email"]);               //Name is optional
+        $mail->addAddress($data["user_email"]);               //Name is optional
 //    $mail->addReplyTo('info@example.com', 'Information');
 //    $mail->addCC('cc@example.com');
 //    $mail->addBCC('bcc@example.com');

@@ -55,12 +55,7 @@ if ($password != $confirmPassword) {
     exit;
 }
 
-
-
-
-/**************************************************************
- *          KONTROLL NËSE EMAILI EKZISTON NË DATABASE
- **************************************************************/
+//KONTROLLOJME NQS EMAILI NDODHET NE DB
 $query_check = "SELECT id
                     FROM users
                     WHERE email = '" . $email . "';";
@@ -87,9 +82,7 @@ if (mysqli_num_rows($result_check) > 0) {
 }
 
 
-/**************************************************************
- *              INSERT USER NË DATABASE
- **************************************************************/
+//INSERT USER NE DB
 $query_insert = "INSERT INTO users SET
                      firstname = '" . $firstname . "',
                      lastname = '" . $lastname . "',
@@ -114,14 +107,13 @@ if (!$result_insert) {
     echo json_encode($response);
     exit;
 }
+
 /**
  * Send E-Mail to user to verify his E-Mail address
  */
 
-
 $user_id = mysqli_insert_id($connection);
 
-// Përgatisim të dhënat që do dërgohen me email
 $data['code'] = $email_code;
 $data['id'] = $user_id;
 $data['token'] = $email_token;

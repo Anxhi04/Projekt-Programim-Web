@@ -25,14 +25,10 @@ function response($status, $message = null, $data = null) {
     exit;
 }
 
-// =====================
-// SWITCH ACTION
-// =====================
+
 switch ($action) {
 
-    // =====================
-    // FETCH PAYMENTS (READ ONLY)
-    // =====================
+
     case 'fetch_payments':
 
         $result = $connection->query("

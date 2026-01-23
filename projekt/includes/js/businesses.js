@@ -99,11 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
         renderBusinessCards();
     });
 
-    // Initial render
     renderBusinessCards();
 });
 
-// Open booking page (you can customize this function later)
 function openBookingPage(business) {
     if (business.id === 1) {
 

@@ -126,9 +126,7 @@ $currentPage = 'businesses';
 </div>
 
 <script>
-    // =====================
-    // DOM REFERENCES (FIX)
-    // =====================
+
     const nameInput = document.getElementById("name");
     const descriptionInput = document.getElementById("description");
     const addressInput = document.getElementById("address");

@@ -3,7 +3,7 @@ $currentPage = 'dashboard';
 require_once __DIR__ . "/../../includes/guard.php";
 require_once __DIR__ . "/../../../db.php";
 
-/* ===== STATISTICS ===== */
+
 
 // Registered Users
 $qUsers = $connection->query("SELECT COUNT(*) AS total FROM users");

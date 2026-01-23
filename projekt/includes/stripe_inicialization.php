@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
-//var_dump(class_exists('\Stripe\StripeClient'));
 
 
 $private_key = "sk_test_51Ss29zIqDX9aL0Ri39idYJJ9Onyen4rbrYMDMAYlk3O3CIjkhvqwAWPuw8EbkOYlSCgYd1ObYkVQ5z7Vkti19JZJ00mUehwWb8";
@@ -13,6 +12,5 @@ $company_name = "Test";
  * Inicializimi i Stripe
  */
 \Stripe\Stripe::setApiKey($private_key);
-// \Stripe\Stripe::setMaxNetworkRetries(2);
 
 $stripe = new \Stripe\StripeClient($private_key);

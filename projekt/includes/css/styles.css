@@ -121,7 +121,7 @@ body {
 }
 
 .cta-button:focus {
-    outline: none;           /* heq outline kur fokusohet */
+    outline: none;
 }
 
 /* Carousel Indicators */

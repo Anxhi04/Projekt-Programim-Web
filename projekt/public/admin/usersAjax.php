@@ -190,13 +190,13 @@ switch ($action) {
         break;
 
     case 'delete_user':
-        // 1️⃣ Kontroll ID
+
         if (!isset($_POST['id']) || !is_numeric($_POST['id'])) {
             response("error", "Invalid user ID");
         }
         $id = (int) $_POST['id'];
 
-        // 2️⃣ Kontroll ID ekzistence
+
         $stmt_check = $connection->prepare("SELECT id FROM users WHERE id = ?");
         $stmt_check->bind_param("i", $id);
         $stmt_check->execute();
@@ -206,12 +206,12 @@ switch ($action) {
             response("error", "User with this ID does not exist.");
         }
 
-        // 3️⃣ Mos lejo fshirjen e vetes
+
         if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $id) {
             response("error", "You cannot delete yourself.");
         }
 
-        // 4️⃣ Fshi user
+
         $stmt_delete = $connection->prepare("DELETE FROM users WHERE id = ?");
         $stmt_delete->bind_param("i", $id);
 

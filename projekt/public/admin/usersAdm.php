@@ -108,9 +108,9 @@ $currentPage = 'users';
                 <div class="mb-3">
                     <label>Role</label>
                     <select id="role" class="form-select">
-                        <option>Admin</option>
-                        <option>Manager</option>
-                        <option>User</option>
+                        <option>admin</option>
+                        <option>manager</option>
+                        <option>user</option>
                     </select>
                 </div>
 
@@ -263,7 +263,7 @@ $currentPage = 'users';
 
         if (error > 0) return;
 
-        // ===================== AJAX SAVE (EKZISTUESE) =====================
+        // ===================== AJAX SAVE  =====================
 
         const data = new URLSearchParams({
             action: userId.value ? "update_user" : "add_user",
@@ -318,7 +318,7 @@ $currentPage = 'users';
                                 confirmButtonColor: "#e91e63"
                             });
 
-                            // ✅ Rifresko tabelën
+
                             renderUsers();
 
                         } else {

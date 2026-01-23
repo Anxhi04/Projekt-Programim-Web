@@ -46,22 +46,6 @@
                     </a>
                 </li>
 
-                <!-- SERVICE CATEGORIES -->
-<!--                <li class="sidebar-item --><?php //= ($currentPage === 'categories') ? 'active' : '' ?><!--">-->
-<!--                    <a href="service-categories.php" class="sidebar-link">-->
-<!--                        <i class="bi bi-tags-fill"></i>-->
-<!--                        <span>Service Categories</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-                <!-- BOOKINGS -->
-<!--                <li class="sidebar-item --><?php //= ($currentPage === 'bookings') ? 'active' : '' ?><!--">-->
-<!--                    <a href="bookingsAdm.php" class="sidebar-link">-->
-<!--                        <i class="bi bi-calendar-check-fill"></i>-->
-<!--                        <span>Bookings</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-
                 <!-- PAYMENTS -->
                 <li class="sidebar-item <?= ($currentPage === 'payments') ? 'active' : '' ?>">
                     <a href="paymentsAdm.php" class="sidebar-link">

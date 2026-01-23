@@ -1,10 +1,10 @@
-// Carousel functionality
+
 let currentSlide = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const indicators = document.querySelectorAll('.indicator');
 const totalSlides = slides.length;
 
-// Function to show specific slide
+
 function showSlide(index) {
     // Remove active class from all slides and indicators
     slides.forEach(slide => slide.classList.remove('active'));
@@ -17,14 +17,14 @@ function showSlide(index) {
     currentSlide = index;
 }
 
-// Function to go to next slide
+
 function nextSlide() {
     let next = (currentSlide + 1) % totalSlides;
     showSlide(next);
 }
 
-// Auto-play carousel every 4 seconds
-let autoPlay = setInterval(nextSlide, 4000);
+
+let autoPlay = setInterval(nextSlide, 3000);
 
 // Manual navigation with indicators
 indicators.forEach((indicator, index) => {
@@ -46,7 +46,7 @@ carouselContainer.addEventListener('mouseleave', () => {
     autoPlay = setInterval(nextSlide, 4000);
 });
 
-// Smooth scroll for anchor links (if added)
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
